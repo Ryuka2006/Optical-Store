@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+ 
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="../Admin/JS/role-gate.js" data-required-role="Cashier"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.13/html-to-image.min.js" integrity="sha512-iZ2ORl595Wx6miw+GuadDet4WQbdSWS3JLMoNfY8cRGoEFy6oT3G9IbcrBeL6AfkgpA51ETt/faX6yLV+/gFJg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<title>United Optic — Cashier Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<link rel="stylesheet" href="css/cashier.css?v=20261030-pos-layout2">
+<link rel="stylesheet" href="../Admin/CSS/role-workspace.css?v=20261030">
+
+</head>
+
+<body id="artifacts-component-root-html">
+ 
+<aside class="sidebar" id="cashierSidebar">
+  <div class="brand">
+    <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><circle cx="7" cy="12" r="4"></circle><circle cx="17" cy="12" r="4"></circle><path d="M11 12h2M3 12h0M21 12h0"></path></svg></div>
+    <div class="brand-text">
+      <div class="name">United Optic</div>
+      <div class="tag">Cashier Panel</div>
+    </div>
+  </div>
+
+  <div class="nav-group-label">Overview</div>
+  <ul class="nav-list">
+    <li class="nav-item active" data-view="dashboard"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="2"></rect><rect x="14" y="3" width="7" height="5" rx="2"></rect><rect x="14" y="12" width="7" height="9" rx="2"></rect><rect x="3" y="16" width="7" height="5" rx="2"></rect></svg></i>Dashboard</li>
+    <li class="nav-item" data-view="pos"><i class="fa-solid fa-cash-register"></i>Point of Sale</li>
+  </ul>
+
+  <div class="nav-group-label">Transactions</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-view="payments"><i class="fa-solid fa-credit-card"></i>Payments</li>
+    <li class="nav-item" data-view="invoices"><i class="fa-solid fa-file-invoice"></i>Invoices</li>
+    <li class="nav-item" data-view="receipts"><i class="fa-solid fa-receipt"></i>Receipts</li>
+    <li class="nav-item" data-view="refunds"><i class="fa-solid fa-rotate-left"></i>Refunds<span class="badge-dot">3</span></li>
+    <li class="nav-item" data-view="history"><i class="fa-solid fa-clock-rotate-left"></i>Payment History</li>
+  </ul>
+
+  <div class="nav-group-label">Account</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-view="notifications"><i class="fa-solid fa-bell"></i>Notifications<span class="badge-dot">5</span></li>
+    <li class="nav-item" data-view="profile"><i class="fa-solid fa-user"></i>Profile</li>
+  </ul>
+
+  <div class="sidebar-spacer"></div>
+  <div class="sidebar-foot">
+    <ul class="nav-list">
+      <li class="nav-item" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</li>
+    </ul>
+  </div>
+</aside>
+
+ 
+<div class="main">
+
+   
+  <header class="topbar">
+<button class="menu-toggle" id="menuBtn" type="button" aria-label="Open menu" aria-controls="cashierSidebar" aria-expanded="false">
+    <i class="fa-solid fa-bars"></i>
+</button>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search transaction, invoice or customer…">
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
+      <button class="icon-btn"><i class="fa-solid fa-barcode"></i></button>
+      <div class="datetime">
+        <div class="time" id="liveTime">01:42:10 PM</div>
+        <div class="date" id="liveDate">Tuesday, July 28, 2026</div>
+      </div>
+      <div class="profile-chip">
+        <div class="avatar">SR</div>
+        <div class="who">
+          <div class="n">Sophea Ry</div>
+          <div class="r">Cashier · Counter 02</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:11px;color:var(--gray-500);"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+
+     
+     
+     
+    <section class="view active" id="view-dashboard">
+      <div class="page-head">
+        <div>
+          <h1>Good afternoon, Sophea 👋</h1>
+          <p>Here's how Counter 02 is performing today, July 28 2026.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline"><i class="fa-regular fa-calendar"></i> Today</button>
+          <button class="btn btn-primary" onclick="switchView(&#39;pos&#39;)"><i class="fa-solid fa-plus"></i> New Sale</button>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-solid fa-receipt"></i></div>
+          <div class="kpi-label">Transactions Today</div>
+          <div class="kpi-value">148</div>
+          <div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 12.4% vs yesterday</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--teal-light);color:var(--teal-dark);"><i class="fa-solid fa-sack-dollar"></i></div>
+          <div class="kpi-label">Revenue Today</div>
+          <div class="kpi-value">$6,284.50</div>
+          <div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 8.1% vs yesterday</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-money-bill-wave"></i></div>
+          <div class="kpi-label">Cash Payments</div>
+          <div class="kpi-value">$1,940.00</div>
+          <div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 31% of total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--purple-bg);color:var(--purple);"><i class="fa-solid fa-qrcode"></i></div>
+          <div class="kpi-label">QR Payments</div>
+          <div class="kpi-value">$1,205.00</div>
+          <div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 19% of total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-solid fa-credit-card"></i></div>
+          <div class="kpi-label">Card Payments</div>
+          <div class="kpi-value">$2,839.50</div>
+          <div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 45% of total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-hourglass-half"></i></div>
+          <div class="kpi-label">Pending Payments</div>
+          <div class="kpi-value">6</div>
+          <div class="kpi-trend trend-down"><i class="fa-solid fa-arrow-trend-down"></i> needs review</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-pad">
+          <div class="card-title-row">
+            <div>
+              <h3>Revenue Overview</h3>
+              <div class="sub">Track how revenue is trending across periods</div>
+            </div>
+            <div class="seg-toggle" id="revToggle">
+              <button class="active" data-range="daily">Daily</button>
+              <button data-range="weekly">Weekly</button>
+              <button data-range="monthly">Monthly</button>
+            </div>
+          </div>
+          <canvas id="revenueChart" height="130"></canvas>
+        </div>
+
+        <div class="card card-pad">
+          <div class="card-title-row">
+            <div>
+              <h3>Payment Method Distribution</h3>
+              <div class="sub">Share of revenue by channel today</div>
+            </div>
+          </div>
+          <canvas id="pmChart" height="170"></canvas>
+          <div class="legend-list">
+            <div class="legend-item"><span class="legend-dot" style="background:#4C7DF0;"></span><span class="lbl">Card</span><span class="val">45%</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#1DAA6B;"></span><span class="lbl">Cash</span><span class="val">31%</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#8B6BF0;"></span><span class="lbl">QR</span><span class="val">19%</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#E39A1D;"></span><span class="lbl">Bank Transfer</span><span class="val">5%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Quick Actions <span class="line"></span></div>
+      <div class="quick-row">
+        <button class="quick-card" onclick="switchView(&#39;pos&#39;)">
+          <div class="qi" style="background:var(--teal-light);color:var(--teal-dark);"><i class="fa-solid fa-cash-register"></i></div>
+          <div class="qt">New Payment</div>
+          <div class="qs">Start a new sale at the counter</div>
+        </button>
+        <button class="quick-card" onclick="switchView(&#39;receipts&#39;)">
+          <div class="qi" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-solid fa-print"></i></div>
+          <div class="qt">Print Receipt</div>
+          <div class="qs">Reprint the last completed sale</div>
+        </button>
+        <button class="quick-card" onclick="switchView(&#39;invoices&#39;)">
+          <div class="qi" style="background:var(--purple-bg);color:var(--purple);"><i class="fa-solid fa-file-circle-plus"></i></div>
+          <div class="qt">Generate Invoice</div>
+          <div class="qs">Create a formal customer invoice</div>
+        </button>
+        <button class="quick-card" onclick="switchView(&#39;refunds&#39;)">
+          <div class="qi" style="background:var(--danger-bg);color:var(--danger);"><i class="fa-solid fa-rotate-left"></i></div>
+          <div class="qt">Process Refund</div>
+          <div class="qs">Review and approve a return</div>
+        </button>
+        <button class="quick-card" onclick="switchView(&#39;history&#39;)">
+          <div class="qi" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div class="qt">Payment History</div>
+          <div class="qs">Browse all past transactions</div>
+        </button>
+      </div>
+
+      <div class="section-title">Notifications <span class="line"></span></div>
+      <div class="notif-grid">
+        <div class="notif-card">
+          <div class="ni" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-hourglass-half"></i></div>
+          <div class="count">6</div>
+          <div class="lbl">Pending Payments</div>
+        </div>
+        <div class="notif-card">
+          <div class="ni" style="background:var(--danger-bg);color:var(--danger);"><i class="fa-solid fa-rotate-left"></i></div>
+          <div class="count">3</div>
+          <div class="lbl">Refund Requests</div>
+        </div>
+        <div class="notif-card">
+          <div class="ni" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="count">142</div>
+          <div class="lbl">Completed Transactions</div>
+        </div>
+        <div class="notif-card">
+          <div class="ni" style="background:var(--gray-100);color:var(--ink-soft);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="count">2</div>
+          <div class="lbl">Failed Payments</div>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-pos">
+      <div class="page-head">
+        <div>
+          <h1>Point of Sale</h1>
+          <p>Counter 02 · Build the cart, then take payment.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline" id="newCustomerBtn"><i class="fa-solid fa-user-plus"></i> New Customer</button>
+          <button class="btn btn-ghost" id="scanItemBtn" type="button"><i class="fa-solid fa-barcode"></i> Scan Item</button>
+        </div>
+      </div>
+
+      <div class="pos-grid">
+         
+        <div class="pos-panel">
+          <h3>Customer Information</h3>
+          <div class="customer-card-mini">
+            <div class="av" id="posCustomerAvatar">--</div>
+            <div>
+              <div class="nm" id="posCustomerName">Choose a customer</div>
+              <div class="id" id="posCustomerId"></div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Customer Name</label>
+            <div class="input-box"><i class="fa-regular fa-user"></i><select id="customerSelect" aria-label="Select customer"><option value="">Select a customer</option></select></div>
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <div class="input-box"><i class="fa-solid fa-phone"></i><span id="posCustomerPhone">—</span></div>
+          </div>
+          <div class="field">
+            <label>Prescription Status</label>
+            <div class="rx-status">
+              <span class="l" id="posPrescription"><i class="fa-solid fa-eye"></i> Select a customer to view prescription status</span>
+              <i class="fa-solid fa-circle-check" style="color:var(--teal-dark);"></i>
+            </div>
+          </div>
+        </div>
+
+         
+        <div class="pos-panel" style="padding:0;">
+          <div class="cart-header">
+            <h3 style="margin:0;">Shopping Cart</h3>
+            <span class="pill active">0 items</span>
+          </div>
+          <div class="cart-table-wrap">
+            <table class="cart-table data-table">
+              <thead>
+                <tr><th>Product</th><th>Quantity</th><th>Unit Price</th><th>Discount</th><th>Total</th><th></th></tr>
+              </thead>
+              <tbody id="cartTableBody">
+                <tr><td colspan="6" class="empty-message">Choose products above to start this sale.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="padding:16px 24px;">
+            <div style="display:flex;gap:10px"><select id="productPicker" aria-label="Product to add" style="flex:1;min-width:0"><option value="">Choose a product</option></select><button class="btn btn-ghost" id="addCartItem"><i class="fa-solid fa-plus"></i> Add item</button></div>
+          </div>
+        </div>
+
+         
+        <div class="pos-panel">
+          <h3>Order Summary</h3>
+          <div class="summary-line"><span>Subtotal</span><span class="v">$0.00</span></div>
+          <div class="summary-line"><span>Discount</span><span class="v">$0.00</span></div>
+          <div class="summary-line"><span>Tax (10%)</span><span class="v">$0.00</span></div>
+          <div class="summary-line total"><span>Grand Total</span><span class="v">$0.00</span></div>
+          <div class="pos-actions">
+            <button class="btn btn-primary"><i class="fa-solid fa-credit-card"></i> Process Payment</button>
+            <button class="btn btn-outline"><i class="fa-solid fa-print"></i> Print Receipt</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Select Payment Method <span class="line"></span></div>
+      <div class="paymethod-row">
+        <div class="pm-card selected" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-money-bill-wave"></i></div>
+          <div class="pm-name">Cash</div>
+          <div class="pm-sub">Instant</div>
+        </div>
+        <div class="pm-card" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-solid fa-credit-card"></i></div>
+          <div class="pm-name">Credit Card</div>
+          <div class="pm-sub">Visa · Mastercard</div>
+        </div>
+        <div class="pm-card" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--purple-bg);color:var(--purple);"><i class="fa-regular fa-credit-card"></i></div>
+          <div class="pm-name">Debit Card</div>
+          <div class="pm-sub">Chip &amp; PIN</div>
+        </div>
+        <div class="pm-card" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-building-columns"></i></div>
+          <div class="pm-name">Bank Transfer</div>
+          <div class="pm-sub">1–2 business days</div>
+        </div>
+        <div class="pm-card" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--teal-light);color:var(--teal-dark);"><i class="fa-solid fa-qrcode"></i></div>
+          <div class="pm-name">QR Payment</div>
+          <div class="pm-sub">KHQR · Scan to pay</div>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-payments">
+      <div class="page-head">
+        <div>
+          <h1>Payments</h1>
+          <p>Accept a payment or review today's payment activity.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-primary" onclick="switchView(&#39;pos&#39;)"><i class="fa-solid fa-plus"></i> Take Payment</button>
+        </div>
+      </div>
+
+      <div class="paymethod-row" style="margin-bottom:28px;">
+        <div class="pm-card selected" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-money-bill-wave"></i></div>
+          <div class="pm-name">Cash</div>
+          <div class="pm-sub">$1,940.00 today</div>
+        </div>
+        <div class="pm-card" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-solid fa-credit-card"></i></div>
+          <div class="pm-name">Credit Card</div>
+          <div class="pm-sub">$1,890.50 today</div>
+        </div>
+        <div class="pm-card" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--purple-bg);color:var(--purple);"><i class="fa-regular fa-credit-card"></i></div>
+          <div class="pm-name">Debit Card</div>
+          <div class="pm-sub">$949.00 today</div>
+        </div>
+        <div class="pm-card" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-building-columns"></i></div>
+          <div class="pm-name">Bank Transfer</div>
+          <div class="pm-sub">$310.00 today</div>
+        </div>
+        <div class="pm-card" onclick="selectPM(this)">
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="pm-icon" style="background:var(--teal-light);color:var(--teal-dark);"><i class="fa-solid fa-qrcode"></i></div>
+          <div class="pm-name">QR Payment</div>
+          <div class="pm-sub">$1,205.00 today</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-toolbar">
+          <div class="filter-pills">
+            <span class="pill active">All</span>
+            <span class="pill">Completed</span>
+            <span class="pill">Pending</span>
+            <span class="pill">Failed</span>
+          </div>
+          <button class="btn btn-outline btn-sm"><i class="fa-solid fa-file-export"></i> Export</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Transaction</th><th>Customer</th><th>Method</th><th>Amount</th><th>Time</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="cell-strong">TXN-88231</td><td><div class="cust-cell"><div class="mini-avatar">DK</div>Dara Kim</div></td><td><span class="pay-tag"><i class="fa-solid fa-money-bill-wave"></i> Cash</span></td><td class="cell-strong">$261.80</td><td>10:41 AM</td><td><span class="badge badge-paid">Completed</span></td></tr>
+              <tr><td class="cell-strong">TXN-88230</td><td><div class="cust-cell"><div class="mini-avatar">SL</div>Sok Lida</div></td><td><span class="pay-tag"><i class="fa-solid fa-qrcode"></i> QR Payment</span></td><td class="cell-strong">$96.00</td><td>10:22 AM</td><td><span class="badge badge-paid">Completed</span></td></tr>
+              <tr><td class="cell-strong">TXN-88229</td><td><div class="cust-cell"><div class="mini-avatar">CV</div>Chan Vibol</div></td><td><span class="pay-tag"><i class="fa-solid fa-credit-card"></i> Credit Card</span></td><td class="cell-strong">$420.00</td><td>09:58 AM</td><td><span class="badge badge-pending">Pending</span></td></tr>
+              <tr><td class="cell-strong">TXN-88228</td><td><div class="cust-cell"><div class="mini-avatar">MP</div>Meas Pisey</div></td><td><span class="pay-tag"><i class="fa-solid fa-building-columns"></i> Bank Transfer</span></td><td class="cell-strong">$180.00</td><td>09:31 AM</td><td><span class="badge badge-failed">Failed</span></td></tr>
+              <tr><td class="cell-strong">TXN-88227</td><td><div class="cust-cell"><div class="mini-avatar">RH</div>Ros Hong</div></td><td><span class="pay-tag"><i class="fa-regular fa-credit-card"></i> Debit Card</span></td><td class="cell-strong">$74.50</td><td>09:12 AM</td><td><span class="badge badge-paid">Completed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-invoices">
+      <div class="page-head">
+        <div>
+          <h1>Invoice Management</h1>
+          <p>Create, view and share customer invoices.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> Generate Invoice</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-toolbar">
+          <div class="filter-pills">
+            <span class="pill active">All Invoices</span>
+            <span class="pill">Paid</span>
+            <span class="pill">Pending</span>
+            <span class="pill">Overdue</span>
+          </div>
+          <div class="search-box" style="width:260px;"><i class="fa-solid fa-magnifying-glass"></i><input placeholder="Search invoice #"></div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Invoice No.</th><th>Customer</th><th>Payment Method</th><th>Amount</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="cell-strong">INV-10492</td>
+                <td><div class="cust-cell"><div class="mini-avatar">DK</div>Dara Kim</div></td>
+                <td><span class="pay-tag"><i class="fa-solid fa-money-bill-wave"></i> Cash</span></td>
+                <td class="cell-strong">$261.80</td>
+                <td><span class="badge badge-paid">Paid</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="icon-action" title="View"><i class="fa-regular fa-eye"></i></button>
+                  <button class="icon-action" title="Print"><i class="fa-solid fa-print"></i></button>
+                  <button class="icon-action" title="Download PDF"><i class="fa-solid fa-file-arrow-down"></i></button>
+                </div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">INV-10491</td>
+                <td><div class="cust-cell"><div class="mini-avatar">SL</div>Sok Lida</div></td>
+                <td><span class="pay-tag"><i class="fa-solid fa-qrcode"></i> QR Payment</span></td>
+                <td class="cell-strong">$96.00</td>
+                <td><span class="badge badge-paid">Paid</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="icon-action" title="View"><i class="fa-regular fa-eye"></i></button>
+                  <button class="icon-action" title="Print"><i class="fa-solid fa-print"></i></button>
+                  <button class="icon-action" title="Download PDF"><i class="fa-solid fa-file-arrow-down"></i></button>
+                </div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">INV-10490</td>
+                <td><div class="cust-cell"><div class="mini-avatar">CV</div>Chan Vibol</div></td>
+                <td><span class="pay-tag"><i class="fa-solid fa-credit-card"></i> Credit Card</span></td>
+                <td class="cell-strong">$420.00</td>
+                <td><span class="badge badge-pending">Pending</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="icon-action" title="View"><i class="fa-regular fa-eye"></i></button>
+                  <button class="icon-action" title="Print"><i class="fa-solid fa-print"></i></button>
+                  <button class="icon-action" title="Download PDF"><i class="fa-solid fa-file-arrow-down"></i></button>
+                </div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">INV-10489</td>
+                <td><div class="cust-cell"><div class="mini-avatar">MP</div>Meas Pisey</div></td>
+                <td><span class="pay-tag"><i class="fa-solid fa-building-columns"></i> Bank Transfer</span></td>
+                <td class="cell-strong">$180.00</td>
+                <td><span class="badge badge-failed">Overdue</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="icon-action" title="View"><i class="fa-regular fa-eye"></i></button>
+                  <button class="icon-action" title="Print"><i class="fa-solid fa-print"></i></button>
+                  <button class="icon-action" title="Download PDF"><i class="fa-solid fa-file-arrow-down"></i></button>
+                </div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">INV-10488</td>
+                <td><div class="cust-cell"><div class="mini-avatar">RH</div>Ros Hong</div></td>
+                <td><span class="pay-tag"><i class="fa-regular fa-credit-card"></i> Debit Card</span></td>
+                <td class="cell-strong">$74.50</td>
+                <td><span class="badge badge-paid">Paid</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="icon-action" title="View"><i class="fa-regular fa-eye"></i></button>
+                  <button class="icon-action" title="Print"><i class="fa-solid fa-print"></i></button>
+                  <button class="icon-action" title="Download PDF"><i class="fa-solid fa-file-arrow-down"></i></button>
+                </div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-receipts">
+      <div class="page-head">
+        <div>
+          <h1>Receipts</h1>
+          <p>Reprint or resend receipts for recent sales.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Email Last Receipt</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Receipt No.</th><th>Customer</th><th>Items</th><th>Method</th><th>Amount</th><th style="text-align:right;">Actions</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="cell-strong">RCT-55210</td>
+                <td><div class="cust-cell"><div class="mini-avatar">DK</div>Dara Kim</div></td>
+                <td>4 items</td>
+                <td><span class="pay-tag"><i class="fa-solid fa-money-bill-wave"></i> Cash</span></td>
+                <td class="cell-strong">$261.80</td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="icon-action"><i class="fa-solid fa-print"></i></button>
+                  <button class="icon-action"><i class="fa-solid fa-envelope"></i></button>
+                </div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">RCT-55209</td>
+                <td><div class="cust-cell"><div class="mini-avatar">SL</div>Sok Lida</div></td>
+                <td>2 items</td>
+                <td><span class="pay-tag"><i class="fa-solid fa-qrcode"></i> QR Payment</span></td>
+                <td class="cell-strong">$96.00</td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="icon-action"><i class="fa-solid fa-print"></i></button>
+                  <button class="icon-action"><i class="fa-solid fa-envelope"></i></button>
+                </div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">RCT-55208</td>
+                <td><div class="cust-cell"><div class="mini-avatar">RH</div>Ros Hong</div></td>
+                <td>1 item</td>
+                <td><span class="pay-tag"><i class="fa-regular fa-credit-card"></i> Debit Card</span></td>
+                <td class="cell-strong">$74.50</td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="icon-action"><i class="fa-solid fa-print"></i></button>
+                  <button class="icon-action"><i class="fa-solid fa-envelope"></i></button>
+                </div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-refunds">
+      <div class="page-head">
+        <div>
+          <h1>Refund Management</h1>
+          <p>Review return requests and process approvals.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline"><i class="fa-solid fa-plus"></i> New Refund Request</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-toolbar">
+          <div class="filter-pills">
+            <span class="pill active">All</span>
+            <span class="pill">Awaiting Review</span>
+            <span class="pill">Approved</span>
+            <span class="pill">Rejected</span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Invoice No.</th><th>Customer</th><th>Refund Amount</th><th>Reason</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="cell-strong">INV-10467</td>
+                <td><div class="cust-cell"><div class="mini-avatar">TK</div>Tep Kanha</div></td>
+                <td class="cell-strong">$45.00</td>
+                <td>Wrong lens prescription</td>
+                <td><span class="badge badge-pending">Awaiting Review</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="btn btn-sm btn-success-soft"><i class="fa-solid fa-check"></i> Approve</button>
+                  <button class="btn btn-sm btn-danger-soft"><i class="fa-solid fa-xmark"></i> Reject</button>
+                </div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">INV-10455</td>
+                <td><div class="cust-cell"><div class="mini-avatar">BN</div>Bopha Nara</div></td>
+                <td class="cell-strong">$128.00</td>
+                <td>Frame defect on delivery</td>
+                <td><span class="badge badge-pending">Awaiting Review</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;">
+                  <button class="btn btn-sm btn-success-soft"><i class="fa-solid fa-check"></i> Approve</button>
+                  <button class="btn btn-sm btn-danger-soft"><i class="fa-solid fa-xmark"></i> Reject</button>
+                </div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">INV-10441</td>
+                <td><div class="cust-cell"><div class="mini-avatar">VS</div>Vann Sreymom</div></td>
+                <td class="cell-strong">$18.00</td>
+                <td>Customer changed mind</td>
+                <td><span class="badge badge-approved">Approved</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;"><span class="cell-sub">Processed by you</span></div></td>
+              </tr>
+              <tr>
+                <td class="cell-strong">INV-10430</td>
+                <td><div class="cust-cell"><div class="mini-avatar">HC</div>Heng Chenda</div></td>
+                <td class="cell-strong">$96.00</td>
+                <td>Duplicate charge</td>
+                <td><span class="badge badge-failed">Rejected</span></td>
+                <td><div class="row-actions" style="justify-content:flex-end;"><span class="cell-sub">Outside return window</span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-history">
+      <div class="page-head">
+        <div>
+          <h1>Payment History</h1>
+          <p>Full log of transactions processed at this counter.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline"><i class="fa-regular fa-calendar"></i> Jul 22 – Jul 28</button>
+          <button class="btn btn-outline"><i class="fa-solid fa-file-export"></i> Export CSV</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-toolbar">
+          <div class="filter-pills">
+            <span class="pill active">All</span>
+            <span class="pill">Completed</span>
+            <span class="pill">Refunded</span>
+            <span class="pill">Failed</span>
+          </div>
+          <div class="search-box" style="width:260px;"><i class="fa-solid fa-magnifying-glass"></i><input placeholder="Search transaction ID"></div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Transaction ID</th><th>Customer</th><th>Method</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="cell-strong">TXN-88231</td><td><div class="cust-cell"><div class="mini-avatar">DK</div>Dara Kim</div></td><td><span class="pay-tag"><i class="fa-solid fa-money-bill-wave"></i> Cash</span></td><td class="cell-strong">$261.80</td><td>Jul 28, 10:41 AM</td><td><span class="badge badge-paid">Completed</span></td></tr>
+              <tr><td class="cell-strong">TXN-88230</td><td><div class="cust-cell"><div class="mini-avatar">SL</div>Sok Lida</div></td><td><span class="pay-tag"><i class="fa-solid fa-qrcode"></i> QR Payment</span></td><td class="cell-strong">$96.00</td><td>Jul 28, 10:22 AM</td><td><span class="badge badge-paid">Completed</span></td></tr>
+              <tr><td class="cell-strong">TXN-88190</td><td><div class="cust-cell"><div class="mini-avatar">VS</div>Vann Sreymom</div></td><td><span class="pay-tag"><i class="fa-regular fa-credit-card"></i> Debit Card</span></td><td class="cell-strong">$18.00</td><td>Jul 27, 4:12 PM</td><td><span class="badge badge-refunded">Refunded</span></td></tr>
+              <tr><td class="cell-strong">TXN-88155</td><td><div class="cust-cell"><div class="mini-avatar">HC</div>Heng Chenda</div></td><td><span class="pay-tag"><i class="fa-solid fa-credit-card"></i> Credit Card</span></td><td class="cell-strong">$96.00</td><td>Jul 26, 2:47 PM</td><td><span class="badge badge-failed">Failed</span></td></tr>
+              <tr><td class="cell-strong">TXN-88112</td><td><div class="cust-cell"><div class="mini-avatar">MP</div>Meas Pisey</div></td><td><span class="pay-tag"><i class="fa-solid fa-building-columns"></i> Bank Transfer</span></td><td class="cell-strong">$180.00</td><td>Jul 25, 11:03 AM</td><td><span class="badge badge-paid">Completed</span></td></tr>
+              <tr><td class="cell-strong">TXN-88098</td><td><div class="cust-cell"><div class="mini-avatar">RH</div>Ros Hong</div></td><td><span class="pay-tag"><i class="fa-solid fa-money-bill-wave"></i> Cash</span></td><td class="cell-strong">$74.50</td><td>Jul 24, 9:15 AM</td><td><span class="badge badge-paid">Completed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-notifications">
+      <div class="page-head">
+        <div>
+          <h1>Notifications</h1>
+          <p>Everything that needs your attention at Counter 02.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline"><i class="fa-solid fa-check-double"></i> Mark All Read</button>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card card-pad">
+          <h3 style="margin-bottom:16px;">Recent Activity</h3>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div style="display:flex;gap:14px;padding:14px 4px;border-bottom:1px solid var(--gray-100);">
+              <div class="ni" style="background:var(--warning-bg);color:var(--warning);width:38px;height:38px;flex-shrink:0;"><i class="fa-solid fa-hourglass-half"></i></div>
+              <div><div style="font-size:13.5px;font-weight:700;">Payment pending confirmation</div><div class="cell-sub">Chan Vibol · TXN-88229 · $420.00 · 2 min ago</div></div>
+            </div>
+            <div style="display:flex;gap:14px;padding:14px 4px;border-bottom:1px solid var(--gray-100);">
+              <div class="ni" style="background:var(--danger-bg);color:var(--danger);width:38px;height:38px;flex-shrink:0;"><i class="fa-solid fa-rotate-left"></i></div>
+              <div><div style="font-size:13.5px;font-weight:700;">New refund request submitted</div><div class="cell-sub">Tep Kanha · INV-10467 · $45.00 · 18 min ago</div></div>
+            </div>
+            <div style="display:flex;gap:14px;padding:14px 4px;border-bottom:1px solid var(--gray-100);">
+              <div class="ni" style="background:var(--success-bg);color:var(--success);width:38px;height:38px;flex-shrink:0;"><i class="fa-solid fa-circle-check"></i></div>
+              <div><div style="font-size:13.5px;font-weight:700;">Transaction completed</div><div class="cell-sub">Dara Kim · TXN-88231 · $261.80 · 41 min ago</div></div>
+            </div>
+            <div style="display:flex;gap:14px;padding:14px 4px;">
+              <div class="ni" style="background:var(--gray-100);color:var(--ink-soft);width:38px;height:38px;flex-shrink:0;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <div><div style="font-size:13.5px;font-weight:700;">Card payment failed</div><div class="cell-sub">Meas Pisey · TXN-88228 · $180.00 · 1 hr ago</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notif-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="notif-card">
+            <div class="ni" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-hourglass-half"></i></div>
+            <div class="count">6</div>
+            <div class="lbl">Pending Payments</div>
+          </div>
+          <div class="notif-card">
+            <div class="ni" style="background:var(--danger-bg);color:var(--danger);"><i class="fa-solid fa-rotate-left"></i></div>
+            <div class="count">3</div>
+            <div class="lbl">Refund Requests</div>
+          </div>
+          <div class="notif-card">
+            <div class="ni" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="count">142</div>
+            <div class="lbl">Completed</div>
+          </div>
+          <div class="notif-card">
+            <div class="ni" style="background:var(--gray-100);color:var(--ink-soft);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="count">2</div>
+            <div class="lbl">Failed Payments</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-profile" data-profile-root>
+      <div class="page-head"><div><h1>Profile</h1><p>Your account details and today's cashier activity.</p></div></div>
+      <div class="two-col profile-layout">
+        <div class="card card-pad profile-identity"><div class="avatar profile-avatar" data-profile-avatar>--</div><h3 data-profile-name>Loading profile…</h3><div class="cell-sub" data-profile-role>Cashier</div><div class="profile-actions"><button class="btn btn-outline btn-sm" type="button" data-profile-edit>Edit profile</button><button class="btn btn-ghost btn-sm" type="button" data-profile-password>Change password</button></div><p class="profile-error" data-profile-error aria-live="polite"></p></div>
+        <div class="card card-pad"><h3 style="margin-bottom:16px">Shift Summary</h3><div class="summary-line"><span>Shift started</span><span class="v">—</span></div><div class="summary-line"><span>Transactions processed</span><span class="v">0</span></div><div class="summary-line"><span>Total collected</span><span class="v">$0.00</span></div><div class="summary-line"><span>Email</span><span class="v" data-profile-email>—</span></div><div class="summary-line"><span>Phone</span><span class="v" data-profile-phone>—</span></div></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="../Admin/JS/profile.js?v=20261001-profile-v2"></script>
+<script src="js/cashier.js?v=20261030-pos-layout2"></script>
+
+</body></html>
