@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LensPoint — Optometrist Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="../Admin/JS/role-gate.js" data-required-role="Optometrist"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="CSS/style.css?v=20261030-responsive-chart">
+<link rel="stylesheet" href="../Admin/CSS/role-workspace.css?v=20261030">
+</head>
+<body id="artifacts-component-root-html">
+
+ 
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+ 
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+      <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><circle cx="7" cy="12" r="4"></circle><circle cx="17" cy="12" r="4"></circle><path d="M11 12h2M3 12h0M21 12h0"></path></svg>
+    </div>
+    <div class="brand-text">
+      <div class="name">United Optic</div>
+      <div class="tag">Optometrist Panel</div>
+    </div>
+    <button class="sidebar-close" id="sidebarCloseBtn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <div class="nav-group-label">Overview</div>
+  <ul class="nav-list">
+    <li class="nav-item active" data-view="dashboard"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="2"></rect><rect x="14" y="3" width="7" height="5" rx="2"></rect><rect x="14" y="12" width="7" height="9" rx="2"></rect><rect x="3" y="16" width="7" height="5" rx="2"></rect></svg></i>Dashboard</li>
+    <li class="nav-item" data-view="appointments"><i class="fa-regular fa-calendar-check"></i>Appointments</li>
+    <li class="nav-item" data-view="patients"><i class="fa-solid fa-users"></i>Patients</li>
+  </ul>
+
+  <div class="nav-group-label">Clinical</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-view="exam"><i class="fa-solid fa-glasses"></i>Eye Examinations</li>
+    <li class="nav-item" data-view="prescriptions"><i class="fa-solid fa-file-prescription"></i>Prescriptions</li>
+    <li class="nav-item" data-view="reports"><i class="fa-solid fa-file-medical"></i>Medical Reports</li>
+  </ul>
+
+  <div class="nav-group-label">Account</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-view="notifications"><i class="fa-solid fa-bell"></i>Notifications<span class="badge-dot" id="notifBadge">4</span></li>
+    <li class="nav-item" data-view="profile"><i class="fa-solid fa-user-doctor"></i>Profile</li>
+  </ul>
+
+  <div class="sidebar-spacer"></div>
+  <div class="sidebar-foot">
+    <ul class="nav-list">
+    <li class="nav-item" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</li>
+    </ul>
+  </div>
+</aside>
+
+ 
+<div class="main">
+
+   
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" id="menuToggleBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search patient by name, ID or phone…">
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn" id="topbarBellBtn" title="Notifications"><i class="fa-regular fa-bell"></i><span class="dot" id="topbarBellDot"></span></button>
+      <button class="icon-btn" title="Calendar" onclick="switchView('appointments')"><i class="fa-regular fa-calendar"></i></button>
+      <div class="datetime">
+        <div class="time" id="liveTime">05:26:28 PM</div>
+        <div class="date" id="liveDate">Tuesday, July 28, 2026</div>
+      </div>
+      <div class="profile-chip" onclick="switchView('profile')" style="cursor:pointer;">
+        <div class="avatar" id="topbarAvatar">DP</div>
+        <div class="who">
+          <div class="n" id="topbarName">Loading profile…</div>
+          <div class="r" id="topbarRole">Optometrist</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:11px;color:var(--gray-500);"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+
+     
+     
+     
+    <section class="view active" id="view-dashboard">
+      <div class="page-head">
+        <div>
+          <h1 id="dashboardGreeting">Dashboard</h1>
+          <p id="dashboardSummary">Loading today's appointments…</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline" onclick="loadDashboard()"><i class="fa-regular fa-calendar"></i> Refresh</button>
+          <button class="btn btn-primary" onclick="switchView('exam')"><i class="fa-solid fa-glasses"></i> Start Examination</button>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-regular fa-calendar-check"></i></div>
+          <div class="kpi-label">Today's Appointments</div>
+          <div class="kpi-value" data-kpi="appointments">—</div>
+          <div class="kpi-trend trend-neutral" data-kpi-next><i class="fa-solid fa-clock"></i> Loading next appointment</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-chair"></i></div>
+          <div class="kpi-label">Waiting Patients</div>
+          <div class="kpi-value" data-kpi="waiting">—</div>
+          <div class="kpi-trend trend-neutral"><i class="fa-solid fa-chair"></i> Confirmed appointments</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-eye"></i></div>
+          <div class="kpi-label">Completed Examinations</div>
+          <div class="kpi-value" data-kpi="completed">—</div>
+          <div class="kpi-trend trend-neutral"><i class="fa-solid fa-eye"></i> Completed today</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:var(--purple-bg);color:var(--purple);"><i class="fa-solid fa-file-prescription"></i></div>
+          <div class="kpi-label">Pending Prescriptions</div>
+          <div class="kpi-value" data-kpi="pending_rx">—</div>
+          <div class="kpi-trend trend-neutral"><i class="fa-regular fa-clock"></i> Awaiting sign-off</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card-pad">
+          <div class="card-title-row">
+            <div>
+              <h3>Examination Volume</h3>
+              <div class="sub">Eye examinations performed over time</div>
+            </div>
+            <div class="seg-toggle" id="examToggle">
+              <button class="active" data-range="daily">Daily</button>
+              <button data-range="weekly">Weekly</button>
+              <button data-range="monthly">Monthly</button>
+            </div>
+          </div>
+          <canvas id="examChart" aria-label="Eye examinations over time"></canvas>
+        </div>
+
+        <div class="card card-pad">
+          <div class="card-title-row">
+            <div>
+              <h3>Common Eye Conditions</h3>
+              <div class="sub">Diagnosed this month</div>
+            </div>
+          </div>
+          <canvas id="condChart" aria-label="Distribution of common eye conditions"></canvas>
+          <div class="legend-list">
+            <div class="legend-item"><span class="legend-dot" style="background:#4C7DF0;"></span><span class="lbl">Myopia</span><span class="val">—</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#1DAA6B;"></span><span class="lbl">Astigmatism</span><span class="val">—</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#8B6BF0;"></span><span class="lbl">Hyperopia</span><span class="val">—</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#E39A1D;"></span><span class="lbl">Presbyopia</span><span class="val">—</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#CBD3E0;"></span><span class="lbl">Other</span><span class="val">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Quick Actions <span class="line"></span></div>
+      <div class="quick-row">
+        <button class="quick-card" onclick="switchView('exam')">
+          <div class="qi" style="background:var(--teal-light);color:var(--teal-dark);"><i class="fa-solid fa-glasses"></i></div>
+          <div class="qt">Start Examination</div>
+          <div class="qs">Begin a new eye exam</div>
+        </button>
+        <button class="quick-card" onclick="openPrescriptionModal('create')">
+          <div class="qi" style="background:var(--purple-bg);color:var(--purple);"><i class="fa-solid fa-file-prescription"></i></div>
+          <div class="qt">Create Prescription</div>
+          <div class="qs">Issue a new lens prescription</div>
+        </button>
+        <button class="quick-card" onclick="switchView('patients')">
+          <div class="qi" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-regular fa-clock"></i></div>
+          <div class="qt">View Medical History</div>
+          <div class="qs">Look up a patient's record</div>
+        </button>
+        <button class="quick-card" onclick="switchView('reports')">
+          <div class="qi" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-print"></i></div>
+          <div class="qt">Print Report</div>
+          <div class="qs">Generate a medical report</div>
+        </button>
+      </div>
+
+      <div class="section-title">Notifications <span class="line"></span></div>
+      <div class="notif-grid">
+        <div class="notif-card">
+          <div class="ni" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-chair"></i></div>
+          <div class="count" data-notif-count="waiting">0</div>
+          <div class="lbl">Patients Waiting</div>
+        </div>
+        <div class="notif-card">
+          <div class="ni" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-regular fa-calendar-check"></i></div>
+          <div class="count" data-notif-count="upcoming">0</div>
+          <div class="lbl">Upcoming Appointment</div>
+        </div>
+        <div class="notif-card">
+          <div class="ni" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-file-prescription"></i></div>
+          <div class="count" data-notif-count="rx_ready">0</div>
+          <div class="lbl">Prescription Ready</div>
+        </div>
+        <div class="notif-card">
+          <div class="ni" style="background:var(--gray-100);color:var(--ink-soft);"><i class="fa-solid fa-rotate"></i></div>
+          <div class="count" data-notif-count="followups">0</div>
+          <div class="lbl">Follow-up Reminders</div>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-appointments">
+      <div class="page-head">
+        <div>
+          <h1>Appointments</h1>
+          <p id="appointmentsSubtitle">Your appointments</p>
+        </div>
+        <div class="head-actions">
+          <label class="btn btn-outline appointment-date-picker"><i class="fa-regular fa-calendar"></i><input id="appointmentsDate" type="date" aria-label="Filter appointments by date"></label>
+          <button class="btn btn-outline" id="appointmentsAllDates" type="button">All dates</button>
+          <button class="btn btn-primary" onclick="openAddAppointmentModal()"><i class="fa-solid fa-plus"></i> New Appointment</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-toolbar">
+          <div class="filter-pills">
+            <span class="pill active">All</span>
+            <span class="pill">Scheduled</span>
+            <span class="pill">Confirmed</span>
+            <span class="pill">Completed</span>
+            <span class="pill">Cancelled</span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Time</th><th>Patient</th><th>Appointment Type</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+            <tbody id="appointmentsTableBody"><tr><td colspan="5" class="empty-state">Loading appointments…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-patients">
+      <div class="page-head">
+        <div>
+          <h1>Patients</h1>
+          <p>Search and manage patient records.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-primary" onclick="openAddPatientModal()"><i class="fa-solid fa-user-plus"></i> Add Patient</button>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card card-pad">
+          <div class="patient-card-mini">
+            <div class="av">--</div>
+            <div>
+              <div class="nm">Loading patient…</div>
+              <div class="id">Patient ID</div>
+            </div>
+          </div>
+          <div class="info-line"><span class="k">Age</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Gender</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Phone</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Email</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Last Visit</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Medical History</span><span class="v">—</span></div>
+          <div class="panel-actions">
+            <button class="btn btn-outline" onclick="switchView('reports')"><i class="fa-regular fa-clock"></i> View History</button>
+            <button class="btn btn-primary" onclick="switchView('exam')"><i class="fa-solid fa-glasses"></i> Examination Records</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="search-box" style="width:280px;"><i class="fa-solid fa-magnifying-glass"></i><input placeholder="Search patients"></div>
+            <div class="filter-pills">
+              <span class="pill active">All</span>
+              <span class="pill">Recent</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Patient</th><th>Age / Gender</th><th>Phone</th><th>Email</th><th>Last Visit</th><th></th></tr></thead>
+              <tbody id="patientsTableBody"><tr><td colspan="6" class="empty-state">Loading patients…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-exam">
+      <div class="page-head">
+        <div>
+          <h1>Eye Examination</h1>
+          <p>Select one patient, review their examination history, and record today’s results.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline" onclick="printExamination()"><i class="fa-solid fa-print"></i> Print Examination Report</button>
+        </div>
+      </div>
+
+      <div class="exam-grid">
+         
+        <div class="exam-panel">
+          <h3><i class="fa-solid fa-id-card" style="color:var(--teal-dark);"></i>Patient Information</h3>
+          <label class="exam-patient-label" for="examPatientSelect">Choose patient</label>
+          <select id="examPatientSelect" class="exam-patient-select"><option value="">Loading patients…</option></select>
+          <div class="patient-card-mini">
+            <div class="av">--</div>
+            <div>
+            <div class="nm">Select a patient</div>
+            <div class="id">Patient ID</div>
+            </div>
+          </div>
+          <div class="info-line"><span class="k">Age</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Gender</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Phone</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Email</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Last Visit</span><span class="v">—</span></div>
+          <div class="info-line"><span class="k">Medical History</span><span class="v">—</span></div>
+          <div class="panel-actions">
+            <button class="btn btn-outline" onclick="loadPatientExaminations()"><i class="fa-solid fa-rotate"></i> Refresh History</button>
+          </div>
+          <div class="exam-history"><strong>Previous examinations</strong><div id="examHistoryList" class="exam-history-list">Choose a patient to see their records.</div></div>
+        </div>
+
+         
+        <div class="exam-panel">
+          <h3><i class="fa-solid fa-glasses" style="color:var(--teal-dark);"></i>Refraction &amp; Vision Assessment</h3>
+          <div class="eye-grid">
+            <div class="eye-box">
+              <div class="eye-title"><i class="fa-solid fa-eye"></i> Right Eye (OD)</div>
+              <div class="field-row">
+                <div class="field"><label>SPH</label><div class="input-box"><input id="examOdSph" value="-2.25"></div></div>
+                <div class="field"><label>CYL</label><div class="input-box"><input id="examOdCyl" value="-0.75"></div></div>
+                <div class="field"><label>Axis</label><div class="input-box"><input id="examOdAxis" value="180°"></div></div>
+              </div>
+            </div>
+            <div class="eye-box">
+              <div class="eye-title"><i class="fa-solid fa-eye"></i> Left Eye (OS)</div>
+              <div class="field-row">
+                <div class="field"><label>SPH</label><div class="input-box"><input id="examOsSph" value="-2.00"></div></div>
+                <div class="field"><label>CYL</label><div class="input-box"><input id="examOsCyl" value="-0.50"></div></div>
+                <div class="field"><label>Axis</label><div class="input-box"><input id="examOsAxis" value="175°"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meta-row">
+            <div class="field"><label>Pupillary Distance (PD)</label><div class="input-box"><i class="fa-solid fa-ruler-horizontal"></i><input id="examPd" value="62 mm"></div></div>
+            <div class="field"><label>Visual Acuity</label><div class="input-box"><i class="fa-solid fa-eye"></i><input id="examVa" value="20/25 (OD) · 20/20 (OS)"></div></div>
+          </div>
+          <div class="meta-row">
+            <div class="field"><label>Eye Pressure (IOP)</label><div class="input-box"><i class="fa-solid fa-gauge"></i><input id="examIop" value="16 mmHg / 15 mmHg"></div></div>
+            <div class="field"><label>Exam Date</label><div class="input-box"><i class="fa-regular fa-calendar"></i><input id="examDate" type="date"></div></div>
+          </div>
+          <div class="field">
+            <label>Doctor Notes</label>
+            <textarea id="examNotes">Mild astigmatism progression noted in right eye since last visit. Recommend updated lens prescription and follow-up in 6 months. Patient reports occasional eye strain during prolonged screen use.</textarea>
+          </div>
+
+          <div class="exam-actions">
+            <input type="hidden" id="examRecordId" value="">
+            <button class="btn btn-primary" onclick="saveExamination('save')"><i class="fa-solid fa-floppy-disk"></i> Save Examination</button>
+            <button class="btn btn-outline" onclick="saveExamination('update')"><i class="fa-solid fa-rotate"></i> Update Examination</button>
+            <button class="btn btn-ghost" onclick="printExamination()"><i class="fa-solid fa-print"></i> Print Report</button>
+          </div>
+        </div>
+
+         
+        <div class="exam-panel">
+          <h3><i class="fa-solid fa-file-prescription" style="color:var(--teal-dark);"></i>Prescription</h3>
+          <div class="rx-card" id="examPrescriptionCard">
+            <div class="rx-head">
+              <span class="num" id="examRxNum">No prescription</span>
+              <span class="exp" id="examRxExp"></span>
+            </div>
+            <div class="info-line"><span class="k">Lens Type</span><span class="v" id="examRxType">—</span></div>
+            <div class="info-line"><span class="k">Lens Power</span><span class="v" id="examRxPower">—</span></div>
+            <div class="info-line"><span class="k">Remarks</span><span class="v" id="examRxRemarks">—</span></div>
+          </div>
+          <div class="panel-actions">
+            <button class="btn btn-primary" onclick="openPrescriptionModal('create')"><i class="fa-solid fa-plus"></i> Create Prescription</button>
+            <button class="btn btn-outline" id="updateExamPrescriptionBtn" disabled><i class="fa-solid fa-rotate"></i> Update Prescription</button>
+            <button class="btn btn-ghost" id="printExamPrescriptionBtn" disabled><i class="fa-solid fa-print"></i> Print Prescription</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-prescriptions">
+      <div class="page-head">
+        <div>
+          <h1>Prescriptions</h1>
+          <p>Manage lens prescriptions issued to patients.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-primary" onclick="openPrescriptionModal('create')"><i class="fa-solid fa-plus"></i> Create Prescription</button>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="filter-pills">
+              <span class="pill active">All</span>
+              <span class="pill">Active</span>
+              <span class="pill">Expired</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Rx No.</th><th>Patient</th><th>Lens Type</th><th>Expiry</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+              <tbody id="prescriptionsTableBody">
+                <tr><td colspan="6" class="empty-state">Loading prescriptions…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card card-pad">
+          <h3 style="margin-bottom:16px;" id="rxFormTitle">New Prescription</h3>
+          <form id="prescriptionForm">
+            <input type="hidden" id="rxFormMode" value="create">
+            <input type="hidden" id="rxFormOriginalId" value="">
+            <div class="field"><label>Patient</label><div class="input-box"><i class="fa-solid fa-user"></i><select id="rxPatient" required><option value="">Select a patient…</option></select></div></div>
+            <div class="field"><label>Lens Type</label><div class="input-box"><i class="fa-solid fa-glasses"></i><input id="rxLensType" value="Single Vision, Anti-Glare" required></div></div>
+            <div class="field"><label>Lens Power</label><div class="input-box"><i class="fa-solid fa-gauge"></i><input id="rxPower" value="OD -2.25 / OS -2.00" required></div></div>
+            <div class="field"><label>Expiry Date</label><div class="input-box"><i class="fa-regular fa-calendar"></i><input id="rxExpiry" type="date" value="2027-01-28" required></div></div>
+            <div class="field"><label>Remarks</label><textarea id="rxRemarks" style="min-height:70px;">Recommend blue-light filter coating for screen use.</textarea></div>
+            <div class="panel-actions">
+              <button type="button" class="btn btn-primary" onclick="savePrescriptionForm()"><i class="fa-solid fa-floppy-disk"></i> Save Prescription</button>
+              <button type="button" class="btn btn-outline" onclick="printPrescriptionForm()"><i class="fa-solid fa-print"></i> Print Prescription</button>
+              <button type="button" class="btn btn-ghost" id="rxFormCancelBtn" style="display:none;" onclick="resetPrescriptionForm()"><i class="fa-solid fa-xmark"></i> Cancel Edit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-reports">
+      <div class="page-head">
+        <div>
+          <h1>Medical Reports &amp; Patient History</h1>
+      <p id="reportsSubtitle">Select a patient to view their examination and prescription history.</p>
+        </div>
+        <div class="head-actions">
+      <select id="reportPatientSelect" aria-label="Select report patient"><option value="">Loading patients…</option></select>
+      <button class="btn btn-outline" onclick="printFullReport()"><i class="fa-solid fa-print"></i> Print Full Report</button>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card card-pad">
+          <h3 style="margin-bottom:18px;">Patient History Timeline</h3>
+          <div class="timeline" id="reportsTimeline"><div class="cell-sub">Select a patient to load their history.</div></div>
+        </div>
+
+        <div class="card card-pad">
+          <h3 style="margin-bottom:16px;">Report Summary</h3>
+          <div class="info-line"><span class="k">Appointments</span><span class="v" id="summaryAppointments">—</span></div>
+          <div class="info-line"><span class="k">Eye Examinations</span><span class="v" id="summaryExams">—</span></div>
+          <div class="info-line"><span class="k">Prescriptions</span><span class="v" id="summaryRx">—</span></div>
+          <div class="info-line"><span class="k">Medical History</span><span class="v" id="summaryCondition">—</span></div>
+          <div class="panel-actions">
+            <button class="btn btn-primary" onclick="printExamination()"><i class="fa-solid fa-print"></i> Print Examination Report</button>
+            <button class="btn btn-outline" onclick="downloadReportPDF()"><i class="fa-solid fa-file-arrow-down"></i> Download PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-notifications">
+      <div class="page-head">
+        <div>
+          <h1>Notifications</h1>
+          <p>Everything that needs your attention today.</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn-outline" onclick="markAllRead()"><i class="fa-solid fa-check-double"></i> Mark All Read</button>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card card-pad">
+          <h3 style="margin-bottom:16px;">Recent Activity</h3>
+          <div style="display:flex;flex-direction:column;gap:2px;" id="notifActivityList">
+              <div class="cell-sub">Loading recent activity…</div>
+          </div>
+        </div>
+
+        <div class="notif-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="notif-card">
+            <div class="ni" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-chair"></i></div>
+            <div class="count" data-notif-count="waiting">0</div>
+            <div class="lbl">Patients Waiting</div>
+          </div>
+          <div class="notif-card">
+            <div class="ni" style="background:var(--blue-bg);color:var(--blue);"><i class="fa-regular fa-calendar-check"></i></div>
+            <div class="count" data-notif-count="upcoming">0</div>
+            <div class="lbl">Upcoming Appt.</div>
+          </div>
+          <div class="notif-card">
+            <div class="ni" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-file-prescription"></i></div>
+            <div class="count" data-notif-count="rx_ready">0</div>
+            <div class="lbl">Rx Ready</div>
+          </div>
+          <div class="notif-card">
+            <div class="ni" style="background:var(--gray-100);color:var(--ink-soft);"><i class="fa-solid fa-rotate"></i></div>
+            <div class="count" data-notif-count="followups">0</div>
+            <div class="lbl">Follow-ups</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     
+     
+     
+    <section class="view" id="view-profile">
+      <div class="page-head">
+        <div>
+          <h1>Profile</h1>
+          <p>Your optometrist account and clinic details.</p>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="card card-pad" style="text-align:center;">
+          <div class="avatar" id="profileAvatarBig" style="width:88px;height:88px;border-radius:22px;font-size:30px;margin:0 auto 16px;">--</div>
+          <h3 style="font-size:18px;" id="profileNameDisplay">Loading profile…</h3>
+          <div class="cell-sub" style="margin-top:4px;" id="profileRoleDisplay">Optometrist</div>
+          <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
+            <button class="btn btn-outline btn-sm" onclick="openEditProfileModal()"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+            <button class="btn btn-ghost btn-sm" onclick="openChangePasswordModal()"><i class="fa-solid fa-key"></i> Change Password</button>
+          </div>
+        </div>
+        <div class="card card-pad">
+          <h3 style="margin-bottom:16px;">Today's Summary</h3>
+          <div class="info-line"><span class="k">Appointments today</span><span class="v" id="profileAppointmentsToday">—</span></div>
+          <div class="info-line"><span class="k">Examinations completed today</span><span class="v" id="profileExamsCompleted">—</span></div>
+          <div class="info-line"><span class="k">Prescriptions issued today</span><span class="v" id="profileRxIssued">—</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+ 
+<div id="printArea"></div>
+
+ 
+<div class="toast-stack" id="toastStack"></div>
+
+ 
+<div class="modal-overlay" id="modalAddPatient">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>Add Patient</h3>
+        <p>Create a new patient record.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('modalAddPatient')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="addPatientForm">
+        <div class="field">
+          <label>Full Name</label>
+          <div class="input-box"><i class="fa-solid fa-user"></i><input id="patientName" placeholder="e.g. Sok Dara" required></div>
+          <div class="error-msg">Please enter the patient's name.</div>
+        </div>
+        <div class="modal-grid-2">
+          <div class="field">
+            <label>Age</label>
+            <div class="input-box"><i class="fa-solid fa-cake-candles"></i><input id="patientAge" type="number" min="0" max="120" placeholder="e.g. 29" required></div>
+            <div class="error-msg">Enter a valid age.</div>
+          </div>
+          <div class="field">
+            <label>Gender</label>
+            <div class="input-box">
+              <i class="fa-solid fa-venus-mars"></i>
+              <select id="patientGender">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Phone Number</label>
+          <div class="input-box"><i class="fa-solid fa-phone"></i><input id="patientPhone" placeholder="+855 12 345 678" required></div>
+          <div class="error-msg">Please enter a phone number.</div>
+        </div>
+        <div class="field">
+          <label>Email Address (optional)</label>
+          <div class="input-box"><i class="fa-solid fa-envelope"></i><input id="patientEmail" type="email" placeholder="patient@example.com"></div>
+          <div class="error-msg">Enter a valid email address.</div>
+        </div>
+        <div class="field">
+          <label>Medical History (optional)</label>
+          <div class="input-box"><i class="fa-solid fa-notes-medical"></i><input id="patientHistory" placeholder="e.g. Myopia, Dry Eye"></div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modalAddPatient')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitAddPatient()"><i class="fa-solid fa-user-plus"></i> Add Patient</button>
+    </div>
+  </div>
+</div>
+
+ 
+<div class="modal-overlay" id="modalAddAppointment">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>New Appointment</h3>
+        <p>Schedule a patient for today.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('modalAddAppointment')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="addAppointmentForm">
+        <div class="field">
+          <label>Patient Name</label>
+          <div class="input-box"><i class="fa-solid fa-user"></i><select id="apptPatient" required><option value="">Select a patient…</option></select></div>
+          <div class="error-msg">Please enter a patient name.</div>
+        </div>
+        <div class="modal-grid-2"><div class="field"><label>Appointment Date</label><div class="input-box"><i class="fa-regular fa-calendar"></i><input id="apptDate" type="date" required></div><div class="error-msg">Please choose an appointment date.</div></div>
+          <div class="field">
+            <label>Time</label>
+            <div class="input-box"><i class="fa-regular fa-clock"></i><input id="apptTime" placeholder="e.g. 03:30 PM" required></div>
+            <div class="error-msg">Please enter a time.</div>
+          </div>
+          <div class="field">
+            <label>Type</label>
+            <div class="input-box">
+              <i class="fa-solid fa-glasses"></i>
+              <select id="apptType">
+                <option>Routine Eye Exam</option>
+                <option>Follow-up Exam</option>
+                <option>Contact Lens Fitting</option>
+                <option>New Patient Consultation</option>
+                <option>Glaucoma Screening</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modalAddAppointment')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitAddAppointment()"><i class="fa-solid fa-plus"></i> Schedule</button>
+    </div>
+  </div>
+</div>
+
+ 
+<div class="modal-overlay" id="modalEditProfile">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>Edit Profile</h3>
+        <p>Update your account details.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('modalEditProfile')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="editProfileForm">
+        <div class="field">
+          <label>Full Name</label>
+          <div class="input-box"><i class="fa-solid fa-user-doctor"></i><input id="profileNameInput" required></div>
+          <div class="error-msg">Please enter your name.</div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modalEditProfile')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitEditProfile()"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+ 
+<div class="modal-overlay" id="modalChangePassword">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>Change Password</h3>
+        <p>Choose a new password for your account.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('modalChangePassword')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="changePasswordForm">
+        <div class="field">
+          <label>Current Password</label>
+          <div class="input-box"><i class="fa-solid fa-lock"></i><input id="pwCurrent" type="password" placeholder="Enter current password" required></div>
+          <div class="error-msg">Please enter your current password.</div>
+        </div>
+        <div class="field">
+          <label>New Password</label>
+          <div class="input-box"><i class="fa-solid fa-key"></i><input id="pwNew" type="password" placeholder="At least 8 characters" required></div>
+          <div class="error-msg">Password must be at least 8 characters.</div>
+        </div>
+        <div class="field">
+          <label>Confirm New Password</label>
+          <div class="input-box"><i class="fa-solid fa-key"></i><input id="pwConfirm" type="password" placeholder="Re-enter new password" required></div>
+          <div class="error-msg">Passwords do not match.</div>
+        </div>
+        <div class="modal-hint">Use at least 8 characters, mixing letters and numbers, for a stronger password.</div>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modalChangePassword')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitChangePassword()"><i class="fa-solid fa-check"></i> Update Password</button>
+    </div>
+  </div>
+</div>
+
+<script src="JS/index.js?v=20261030-responsive-chart-2"></script>
+</body>
+</html>
