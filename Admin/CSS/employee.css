@@ -1,0 +1,119 @@
+
+#sec-employees #employeeForm,
+.uo-modal #employeeForm {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 20px;
+    background: var(--card, #fff);
+    border: 1px solid var(--border, #e7ecf1);
+    border-radius: 16px;
+    box-shadow: var(--shadow, 0 4px 16px rgba(22, 33, 62, .06));
+}
+
+#sec-employees #employeeForm input,
+#sec-employees #employeeForm select,
+.uo-modal #employeeForm input,
+.uo-modal #employeeForm select {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    padding: 0 13px;
+    border: 1px solid var(--border, #d9dce5);
+    border-radius: 9px;
+    background: #fff;
+    color: var(--text, #16213e);
+    font: 400 13px "Inter", "Poppins", sans-serif;
+    outline: none;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+#sec-employees #employeeForm input::placeholder,
+.uo-modal #employeeForm input::placeholder {
+    color: var(--text-mute, #8992a3);
+    opacity: 1;
+}
+
+#sec-employees #employeeForm input:focus,
+#sec-employees #employeeForm select:focus,
+.uo-modal #employeeForm input:focus,
+.uo-modal #employeeForm select:focus {
+    border-color: var(--teal, #2cb5a5);
+    background: #fbfffe;
+    box-shadow: 0 0 0 3px rgba(44, 181, 165, .14);
+}
+
+#sec-employees #employeeForm select,
+.uo-modal #employeeForm select { cursor: pointer; }
+#sec-employees #employeeForm input[readonly],
+.uo-modal #employeeForm input[readonly] {
+    background: #f4f5f8;
+    color: #7d8798;
+    cursor: not-allowed;
+}
+
+#sec-employees #employeeForm #employeeSubmitBtn,
+#sec-employees #employeeForm #employeeClearBtn,
+.uo-modal #employeeForm #employeeSubmitBtn,
+.uo-modal #employeeForm #employeeClearBtn {
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 9px;
+    font: 600 13px "Inter", "Poppins", sans-serif;
+    cursor: pointer;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+#sec-employees #employeeForm #employeeSubmitBtn,
+.uo-modal #employeeForm #employeeSubmitBtn {
+    border: 1px solid var(--teal, #2cb5a5);
+    background: var(--teal, #2cb5a5);
+    color: #fff;
+}
+
+#sec-employees #employeeForm #employeeSubmitBtn:hover,
+.uo-modal #employeeForm #employeeSubmitBtn:hover {
+    background: var(--teal-dark, #188f83);
+    border-color: var(--teal-dark, #188f83);
+    box-shadow: 0 5px 14px rgba(22, 143, 131, .2);
+    transform: translateY(-1px);
+}
+
+#sec-employees #employeeForm #employeeClearBtn,
+.uo-modal #employeeForm #employeeClearBtn {
+    border: 1px solid var(--border, #d9dce5);
+    background: #fff;
+    color: var(--text, #16213e);
+}
+
+#sec-employees #employeeForm #employeeClearBtn:hover,
+.uo-modal #employeeForm #employeeClearBtn:hover {
+    border-color: var(--teal, #2cb5a5);
+    background: var(--teal-light, #effaf8);
+}
+
+#sec-employees #employeeTableBody .ricon { cursor: pointer; }
+#sec-employees #employeeTableBody .empty-message {
+    padding: 28px;
+    color: var(--text-mute, #8992a3);
+    font-size: 13px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    #sec-employees #employeeForm { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+    #sec-employees #employeeForm {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 11px;
+        padding: 16px;
+    }
+    #sec-employees #employeeForm input,
+    #sec-employees #employeeForm select,
+    #sec-employees #employeeForm button { min-height: 42px; }
+}

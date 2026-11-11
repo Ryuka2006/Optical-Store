@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10283f">
+  <title>United Optic · Sign in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/admin.css">
+  <link rel="stylesheet" href="CSS/app.css">
+  <style>
+    :root{--login-teal:#c385fa;--login-navy:#10283f}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(390px,.95fr);font-family:'DM Sans',sans-serif;background:#f4f7f9;color:#15283b}
+    .welcome{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(32px,6vw,84px);color:#fff;background:radial-gradient(ellipse at 16% 100%,rgba(195,133,250,.36),transparent 44%),linear-gradient(145deg,#10283f 0%,#183c55 58%,#55009f 130%)}
+    .welcome:after{content:'';position:absolute;width:420px;height:420px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-160px;top:12%;box-shadow:0 0 0 38px rgba(255,255,255,.025),0 0 0 78px rgba(255,255,255,.025)}
+    .brand{display:flex;align-items:center;gap:13px;position:relative;z-index:1}.brand-mark{width:46px;height:46px;border-radius:15px;background:var(--login-teal);display:grid;place-items:center;font:800 17px Manrope,sans-serif;color:#fff;box-shadow:0 10px 28px rgba(195,133,250,.28)}.brand b{display:block;font:800 17px Manrope,sans-serif;letter-spacing:-.03em}.brand small{display:block;color:#b5c9d5;margin-top:2px;font-size:12px;letter-spacing:.04em}
+    .welcome-copy{position:relative;z-index:1;max-width:540px;margin:70px 0}.eyebrow{text-transform:uppercase;letter-spacing:.16em;color:#8de2d6;font-size:11px;font-weight:700}.welcome h1{font:800 clamp(36px,5vw,62px)/1.07 Manrope,sans-serif;letter-spacing:-.055em;margin:20px 0}.welcome-copy p{max-width:440px;color:#c4d4dd;font-size:16px;line-height:1.75}.roles{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}.roles span{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:999px;padding:8px 12px;font-size:12px;color:#e1edf2}.foot{position:relative;z-index:1;color:#a9c0cd;font-size:12px}
+    .login-side{display:grid;place-items:center;padding:36px}.login-card{width:min(100%,420px);padding:clamp(26px,4vw,44px);background:#fff;border:1px solid #e5ebef;border-radius:22px;box-shadow:0 22px 70px rgba(21,45,65,.09)}.login-card h2{font:800 25px Manrope,sans-serif;letter-spacing:-.04em;margin:0 0 7px;color:#15283b}.login-card>p{color:#738393;margin:0 0 28px;font-size:14px;line-height:1.6}.field{display:block;margin-bottom:17px;font-size:12px;font-weight:700;color:#4e6374}.field input{display:block;width:100%;height:48px;margin-top:8px;padding:0 14px;border:1px solid #dbe3e8;border-radius:11px;font:500 14px 'DM Sans',sans-serif;color:#172b3e;outline:none;transition:.18s}.field input:focus{border-color:var(--login-teal);box-shadow:0 0 0 4px rgba(195,133,250,.16)}.submit{width:100%;height:49px;margin-top:7px;border:0;border-radius:11px;background:linear-gradient(100deg,#55009f,#c385fa);color:#fff;font:700 14px 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 8px 20px rgba(195,133,250,.24);transition:transform .18s,box-shadow .18s}.submit:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(195,133,250,.3)}.submit:disabled{opacity:.65;cursor:wait;transform:none}.helper{margin-top:18px;text-align:center;font-size:12px;color:#80909c}.error{display:none;margin:0 0 16px;padding:11px 12px;border:1px solid #f5cccc;border-radius:9px;background:#fff4f3;color:#ad3733;font-size:13px;line-height:1.5}.loading{color:#748595;font-size:13px}
+    @media(max-width:850px){body{grid-template-columns:1fr}.welcome{min-height:270px;padding:28px 7vw}.welcome-copy{margin:42px 0 22px}.welcome h1{font-size:38px}.welcome-copy p,.roles,.foot{display:none}.login-side{padding:25px 18px}.brand-mark{width:40px;height:40px}.welcome:after{right:-250px}}
+  </style>
+  <style>.brand-mark{width:40px;height:40px;border-radius:12px}.brand-mark svg{width:22px;height:22px}</style>
+</head>
+<body>
+  <section class="welcome" aria-label="United Optic overview">
+    <div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><circle cx="7" cy="12" r="4"></circle><circle cx="17" cy="12" r="4"></circle><path d="M11 12h2M3 12h0M21 12h0"></path></svg></div><div><b>United Optic</b><small>VISION CARE · STORE OPERATIONS</small></div></div>
+    <div class="welcome-copy"><div class="eyebrow">One connected workspace</div><h1>Care for eyes.<br>Run a clearer business.</h1><p>Sign in once to open your role workspace. Patient, inventory, sales and payment records stay connected in one store database.</p><div class="roles"><span>Administration</span><span>Optometry</span><span>Sales</span><span>Cashier</span></div></div>
+    <div class="foot">United Optic · Secure team access</div>
+  </section>
+  <main class="login-side"><form class="login-card" id="loginForm">
+    <h2 id="formTitle">Welcome back</h2><p id="formIntro">Sign in with your team account. We’ll open the workspace for your role.</p>
+    <div class="error" id="loginError" role="alert"></div>
+    <label class="field" id="roleField">Open workspace<select id="role" required><option value="">Choose your role</option><option value="Admin">Admin</option><option value="Cashier">Cashier</option><option value="Sales Staff">Sales Staff</option><option value="Optometrist">Optometrist</option></select></label>
+    <label class="field" id="nameField" hidden>Full name<input id="fullName" autocomplete="name"></label>
+    <label class="field" id="usernameField">Username<input id="username" autocomplete="username" required autofocus></label>
+    <label class="field" id="passwordField">Password<input id="password" type="password" autocomplete="current-password" required></label>
+    <button type="submit" class="submit" id="loginBtn">Sign in</button>
+    <div class="helper" id="loginHelp">Your role is assigned by your administrator.</div>
+  </form></main>
+  <script src="JS/api.js"></script>
+  <script>
+    const form = document.getElementById('loginForm');
+    const errorBox = document.getElementById('loginError');
+    const loginButton = document.getElementById('loginBtn');
+    let setupRequired = false;
+    const roleHome = role => ({admin:'admin.html',administrator:'admin.html',cashier:'../Cashier/Cashier.html','sales staff':'../Sale-Staff/index.html','sale staff':'../Sale-Staff/index.html','sale-staff':'../Sale-Staff/index.html',optometrist:'../Optometrist/index.html'})[String(role||'').trim().toLowerCase()];
+
+    function showMessage(message) {
+      errorBox.textContent = message;
+      errorBox.style.display = 'block';
+    }
+
+    async function initializeLogin() {
+      try {
+        const state = await apiGet('auth');
+        if (state.authenticated) {
+          location.replace(roleHome(state.user.role) || 'login.html');
+          return;
+        }
+        setupRequired = !!state.setupRequired;
+        if (setupRequired) {
+          document.getElementById('formTitle').textContent = 'Set up your admin account';
+          document.getElementById('formIntro').textContent = 'Create the first administrator for this database. This setup is available only while there are no user accounts.';
+          document.getElementById('nameField').hidden = false;
+          document.getElementById('fullName').required = true;
+          document.getElementById('role').value = 'Admin';
+          document.getElementById('role').disabled = true;
+          document.getElementById('password').minLength = 8;
+          loginButton.textContent = 'Create administrator';
+          document.getElementById('loginHelp').textContent = 'Choose a username and a password with at least 8 characters.';
+        }
+      } catch (error) {
+        showMessage(error.message);
+      }
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      errorBox.style.display = 'none';
+
+      loginButton.disabled = true;
+      try {
+        const result = await apiPost('auth', {
+          action: setupRequired ? 'bootstrap' : 'login',
+          name: document.getElementById('fullName').value.trim(),
+          username: document.getElementById('username').value.trim(),
+          password: document.getElementById('password').value,
+          requestedRole: document.getElementById('role').value
+        });
+        const destination = roleHome(result.user?.role);
+        if (!destination) throw new Error('This account has no workspace assigned. Ask an administrator to check its role.');
+        location.replace(destination);
+      } catch (error) {
+        showMessage(error.message);
+        loginButton.disabled = false;
+      }
+    });
+
+    initializeLogin();
+  </script>
+  <style>
+    .field select{display:block;width:100%;height:48px;margin-top:8px;padding:0 14px;border:1px solid #dbe3e8;border-radius:11px;background:#fff;color:#172b3e;font:500 14px 'DM Sans',sans-serif;outline:none}
+    .field select:focus{border-color:var(--login-teal);box-shadow:0 0 0 4px rgba(195,133,250,.16)}
+    .field select:disabled{background:#f5f1fa;color:#69527f}
+  </style>
+</body>
+</html>

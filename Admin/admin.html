@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>United Optic — Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link
+    href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="CSS/appointment.css">
+  <link rel="stylesheet" href="CSS/customer.css">
+  <link rel="stylesheet" href="CSS/employee.css?v=20260930-4">
+  <link rel="stylesheet" href="CSS/user.css">
+  <link rel="stylesheet" href="CSS/admin.css?v=20261001-5">
+  <link rel="stylesheet" href="CSS/app.css?v=20261001-6">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+
+<body id="artifacts-component-root-html">
+  
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0B3B36" stroke-width="2.4" stroke-linecap="round">
+          <circle cx="7" cy="12" r="4"></circle>
+          <circle cx="17" cy="12" r="4"></circle>
+          <path d="M11 12h2M3 12h0M21 12h0"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">United Optic</div>
+        <div class="brand-sub">Admin Panel</div>
+      </div>
+    </div>
+
+    <div class="nav-scroll">
+      <div class="nav-group-label">Overview</div>
+      <div class="nav-item" data-target="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="9" rx="2"></rect>
+          <rect x="14" y="3" width="7" height="5" rx="2"></rect>
+          <rect x="14" y="12" width="7" height="9" rx="2"></rect>
+          <rect x="3" y="16" width="7" height="5" rx="2"></rect>
+        </svg>
+        Dashboard
+      </div>
+
+      <div class="nav-group-label">People</div>
+      <div class="nav-item" data-target="users">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        User Management
+      </div>
+      <div class="nav-item" data-target="customers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        Customer Management
+      </div>
+      <div class="nav-item" data-target="employees">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        Employee Management
+      </div>
+
+      <div class="nav-group-label">Clinical</div>
+      <div class="nav-item active" data-target="appointments">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+          <path d="M16 2v4M8 2v4M3 10h18"></path>
+        </svg>
+        Appointment Management
+        <span class="nav-badge">6</span>
+      </div>
+      <div class="nav-item" data-target="exams">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        Eye Examination
+      </div>
+      <div class="nav-item" data-target="prescriptions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <path d="M14 2v6h6M9 15h6M9 11h2"></path>
+        </svg>
+        Prescription Management
+      </div>
+
+      <div class="nav-group-label">Catalog</div>
+      <div class="nav-item" data-target="products">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path
+            d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59l7.18 7.18a2 2 0 0 1 0 2.82z">
+          </path>
+          <circle cx="7.5" cy="7.5" r="1.5"></circle>
+        </svg>
+        Product Management
+      </div>
+      <div class="nav-item" data-target="brands">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"></path>
+        </svg>
+        Brand Management
+      </div>
+      <div class="nav-item" data-target="suppliers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+          <path d="M16 8h4l3 3v5h-7z"></path>
+          <circle cx="5.5" cy="18.5" r="1.7"></circle>
+          <circle cx="18.5" cy="18.5" r="1.7"></circle>
+        </svg>
+        Supplier Management
+      </div>
+      <div class="nav-item" data-target="inventory">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M21 8V21H3V8"></path>
+          <path d="M1 3h22v5H1z"></path>
+          <path d="M10 12h4"></path>
+        </svg>
+        Inventory Management
+        <span class="nav-badge">4</span>
+      </div>
+
+      <div class="nav-group-label">Commerce</div>
+      <div class="nav-item" data-target="sales">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M3 3h18v4H3zM3 7l2 13h14l2-13M8 11v5M12 11v5M16 11v5"></path>
+        </svg>
+        Sales Management
+      </div>
+      <div class="nav-item" data-target="payments">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="1" y="4" width="22" height="16" rx="2"></rect>
+          <path d="M1 10h22"></path>
+        </svg>
+        Payment Management
+      </div>
+
+      <div class="nav-group-label">System</div>
+      <div class="nav-item" data-target="reports">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M18 20V10M12 20V4M6 20v-6"></path>
+        </svg>
+        Reports
+      </div>
+      <div class="nav-item" data-target="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+          </path>
+        </svg>
+        Settings
+      </div>
+      <div class="nav-item" data-target="notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        Notifications
+        <span class="nav-badge">9</span>
+      </div>
+      <div class="nav-item" data-target="profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        Profile
+      </div>
+      <div class="nav-item" id="logoutBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        Logout
+      </div>
+    </div>
+  </aside>
+
+  
+  <div class="main">
+    
+    <div class="topnav">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <div class="sidebar-overlay" id="sidebarOverlay"></div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input id="globalSearch" type="search" placeholder="Search customers, orders, products, prescriptions…" aria-label="Search all records">
+      </div>
+
+      <div class="branch-chip">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"></path>
+          <circle cx="12" cy="9" r="2.6"></circle>
+        </svg>
+        Riverside Mall — Branch 01
+      </div>
+
+      <div class="topnav-right">
+        <button type="button" class="icon-btn" id="openCalendarBtn" title="Calendar" aria-label="Open appointments">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <path d="M16 2v4M8 2v4M3 10h18"></path>
+          </svg>
+        </button>
+        <button type="button" class="icon-btn" id="openMessagesBtn" title="Messages and alerts" aria-label="Open notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span class="dot-badge"></span>
+        </button>
+        <button type="button" class="icon-btn" id="openNotificationsBtn" title="Notifications" aria-label="Open notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="dot-badge"></span>
+        </button>
+        <div class="datetime">
+          <b>Tue, 28 Jul 2026</b><br>10:42 AM (+07:00)
+        </div>
+        <button type="button" class="profile-chip" id="openProfileBtn" aria-label="Open your profile">
+          <div class="avatar">SK</div>
+          <div class="profile-meta">
+            <div class="pname">Sophea Khan</div>
+            <div class="prole">Store Administrator</div>
+          </div>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    
+    <div class="content" id="contentArea">
+
+      
+      <section class="content-section" id="sec-dashboard">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Overview / <b>Dashboard</b></div>
+            <div class="page-title">Good morning, Sophea 👋</div>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" id="dashboardQuickSaleBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>Quick Sale</button>
+            <button type="button" class="btn btn-primary" id="dashboardNewAppointmentBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>New Appointment</button>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg></div>
+              <div class="kpi-trend up">▲ 8.2%</div>
+            </div>
+            <div class="kpi-value" id="totalCustomers">0</div>
+            <div class="kpi-label">Total Customers</div>
+            <canvas class="kpi-spark" id="spark1" width="0" height="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg></div>
+              <div class="kpi-trend up">▲ 2.1%</div>
+            </div>
+            <div class="kpi-value" id="totalEmployees">0</div>
+            <div class="kpi-label">Total Employees</div>
+            <canvas class="kpi-spark" id="spark2" width="0" height="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59l7.18 7.18a2 2 0 0 1 0 2.82z">
+                  </path>
+                  <circle cx="7.5" cy="7.5" r="1.5"></circle>
+                </svg></div>
+              <div class="kpi-trend up">▲ 5.6%</div>
+            </div>
+            <div class="kpi-value" id="totalProducts">0</div>
+            <div class="kpi-label">Total Products</div>
+            <canvas class="kpi-spark" id="spark3" width="0" height="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+                  <path d="M16 8h4l3 3v5h-7z"></path>
+                  <circle cx="5.5" cy="18.5" r="1.7"></circle>
+                  <circle cx="18.5" cy="18.5" r="1.7"></circle>
+                </svg></div>
+              <div class="kpi-trend down">▼ 1.4%</div>
+            </div>
+            <div class="kpi-value" id="totalSuppliers">0</div>
+            <div class="kpi-label">Total Suppliers</div>
+            <canvas class="kpi-spark" id="spark4" width="0" height="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 3h18v4H3zM3 7l2 13h14l2-13"></path>
+                </svg></div>
+              <div class="kpi-trend up">▲ 12.9%</div>
+            </div>
+            <div class="kpi-value">$3,940</div>
+            <div class="kpi-label">Total Sales Today</div>
+            <canvas class="kpi-spark" id="spark5" width="0" height="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg></div>
+              <div class="kpi-trend up">▲ 9.3%</div>
+            </div>
+            <div class="kpi-value">$96,214</div>
+            <div class="kpi-label">Monthly Revenue</div>
+            <canvas class="kpi-spark" id="spark6" width="0" height="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <path d="M3 6h18M16 10a4 4 0 0 1-8 0"></path>
+                </svg></div>
+              <div class="kpi-trend up">▲ 4.7%</div>
+            </div>
+            <div class="kpi-value">128</div>
+            <div class="kpi-label">Active Orders</div>
+            <canvas class="kpi-spark" id="spark7" width="0" height="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                  <path d="M16 2v4M8 2v4M3 10h18"></path>
+                </svg></div>
+              <div class="kpi-trend up">▲ 3 more</div>
+            </div>
+            <div class="kpi-value">18</div>
+            <div class="kpi-label">Appointments Today</div>
+            <canvas class="kpi-spark" id="spark8" width="0" height="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-card">
+            <div class="chart-card-head">
+              <div>
+                <h3>Monthly Sales Trend</h3>
+                <div class="sub">Revenue vs. units sold — last 12 months</div>
+              </div>
+              <div class="chart-tabs">
+                <button type="button" class="chart-tab active" data-range="12M">12M</button>
+                <button type="button" class="chart-tab" data-range="6M">6M</button>
+                <button type="button" class="chart-tab" data-range="30D">30D</button>
+              </div>
+            </div>
+            <canvas id="salesLineChart" height="0" width="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-head">
+              <div>
+                <h3>Inventory Split</h3>
+                <div class="sub">By category</div>
+              </div>
+            </div>
+            <canvas id="invDoughnut" height="0" width="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-card">
+            <div class="chart-card-head">
+              <div>
+                <h3>Revenue by Branch</h3>
+                <div class="sub">Current quarter, in USD</div>
+              </div>
+              <span class="legend-pill">+9.3% QoQ</span>
+            </div>
+            <canvas id="revenueBar" height="0" width="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-head">
+              <div>
+                <h3>Best Selling Products</h3>
+                <div class="sub">Units moved this month</div>
+              </div>
+            </div>
+            <canvas id="bestSellersBar" height="0" width="0"
+              style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas>
+          </div>
+        </div>
+
+        <div class="lower-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Alert Center</h3><a href="#sec-notifications" data-nav-target="notifications">View all</a>
+            </div><div id="alertList"><div class="empty-message">Loading…</div></div></div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Recent Activity</h3><a href="#sec-notifications" data-nav-target="notifications">View all</a>
+            </div><div id="activityList"><div class="empty-message">Loading…</div></div></div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Today's Appointments</h3><a href="#sec-appointments" data-nav-target="appointments">Open calendar</a>
+            </div><div id="todayAppointments"><div class="empty-message">Loading…</div></div></div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-users">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">System / <b>User Management</b></div>
+            <div class="page-title">User Management</div>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" id="assignRolesBtn">Assign Roles</button>
+            <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>Add User</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg><input placeholder="Search users…"></div>
+            <div class="filter-chip">Role: All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.4">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg></div>
+            <div class="filter-chip">Status: All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.4">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg></div>
+            <div class="spacer"><button class="btn btn-outline btn-sm">Reset Password</button></div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody"><tr><td colspan="7" class="empty-message">Loading…</td></tr></tbody>
+          </table>
+          <div class="pagination"><span>Showing 1–6 of 62 users</span>
+            <div class="page-btns">
+              <div class="page-btn">‹</div>
+              <div class="page-btn active">1</div>
+              <div class="page-btn">2</div>
+              <div class="page-btn">3</div>
+              <div class="page-btn">›</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-customers">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">People / <b>Customer Management</b></div>
+            <div class="page-title">Customer Management</div>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" id="customerHistoryBtn">View History</button>
+            <button type="button" class="btn btn-primary" id="newCustomerBtn"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>Add Customer</button>
+          </div>
+        </div>
+        <form id="customerForm" hidden>
+          <input type="number" id="custID" placeholder="Customer ID (optional)">
+          <input type="text" id="custFullName" placeholder="Full name">
+          <select id="custGender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <input type="date" id="custDOB" title="Date of birth">
+          <input type="tel" id="custPhone" placeholder="Phone">
+          <input type="email" id="custEmail" placeholder="Email">
+          <input type="date" id="custRegDate" title="Registration date (defaults to today)">
+          <input type="text" id="custAddress" placeholder="Address">
+          <button type="button" id="customerSubmitBtn">Add Customer</button>
+          <button type="button" id="customerClearBtn">Clear</button>
+        </form>
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg><input id="customerSearch" placeholder="Search customers…"></div>
+            <div class="filter-chip" id="customerGenderFilter" role="button" tabindex="0">Gender: All <svg viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor"
+                stroke-width="2.4">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg></div>
+            <div class="filter-chip" id="customerYearFilter" role="button" tabindex="0">Registered: All time <svg viewBox="0 0 24 24" width="12" fill="none"
+                stroke="currentColor" stroke-width="2.4">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg></div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Registered</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="customerTableBody">
+              <tr>
+                <td colspan="7" class="empty-message">Loading customers…</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination"><span>Loading…</span>
+            <div class="page-btns">
+              <div class="page-btn">‹</div>
+              <div class="page-btn active">1</div>
+              <div class="page-btn">2</div>
+              <div class="page-btn">3</div>
+              <div class="page-btn">›</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section active" id="sec-appointments">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Clinical / <b>Appointment Management</b></div>
+            <div class="page-title">Appointment Management</div>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" id="assignOptometristBtn">Assign Optometrist</button>
+            <button type="button" class="btn btn-primary" id="newAppointmentBtn"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>New Appointment</button>
+          </div>
+        </div>
+        <form id="appointmentForm" hidden>
+
+          <input type="number" id="appointmentID" placeholder="Appointment ID (auto)" readonly>
+
+          <select id="customerID" aria-label="Appointment customer"><option value="">Select customer…</option></select>
+
+          <select id="optometristID" aria-label="Appointment optometrist"><option value="">Select optometrist…</option></select>
+
+          <input type="date" id="appointmentDate">
+
+          <input type="time" id="appointmentTime">
+
+          <select id="appointmentStatus">
+
+            <option value="Scheduled">
+              Scheduled
+            </option>
+
+            <option value="Confirmed">
+              Confirmed
+            </option>
+
+            <option value="Completed">
+              Completed
+            </option>
+
+            <option value="Cancelled">
+              Cancelled
+            </option>
+
+          </select>
+
+          <button type="button" id="appointmentSubmitBtn">
+            Add Appointment
+          </button>
+
+        </form>
+        <div class="appt-toolbar">
+          <button type="button" class="btn btn-outline btn-sm" id="appointmentWeekPrev" aria-label="Previous week">‹</button>
+          <div class="appt-week" id="appointmentWeek"></div>
+          <button type="button" class="btn btn-outline btn-sm" id="appointmentWeekNext" aria-label="Next week">›</button>
+          <button type="button" class="filter-chip" id="appointmentStaffFilter">Optometrist: All <svg viewBox="0 0 24 24" width="12" fill="none"
+              stroke="currentColor" stroke-width="2.4">
+              <path d="m6 9 6 6 6-6"></path>
+            </svg></button>
+        </div>
+        <div class="appt-grid" id="appointmentContainer">
+          <div class="empty-message">Loading appointments…</div>
+        </div>
+        <div class="pagination" id="appointmentPagination"><span>Loading appointments...</span><div class="page-btns"></div></div>
+      </section>
+
+      
+      <section class="content-section" id="sec-exams">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Clinical / <b>Eye Examination</b></div>
+            <div class="page-title">Eye Examination Records</div>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" id="printExamsBtn">Print Report</button>
+            <button type="button" class="btn btn-primary" id="newExamBtn">Add Examination</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg><input id="examSearch" type="search" placeholder="Search examination records…" aria-label="Search examination records"></div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Exam ID</th>
+                <th>Customer</th>
+                <th>Exam Date</th>
+                <th>Optometrist</th>
+                <th>Result Summary</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="examTableBody"><tr><td colspan="6" class="empty-message">Loading…</td></tr></tbody>
+          </table>
+          <div class="pagination" id="examPagination"><span>Loading…</span>
+            <div class="page-btns"></div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-prescriptions">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Clinical / <b>Prescription Management</b></div>
+            <div class="page-title">Prescription Management</div>
+          </div>
+          <div class="page-actions"><button type="button" id="printPrescriptionsBtn" class="btn btn-outline">Print Prescription</button><button type="button" id="newPrescriptionBtn" class="btn btn-primary">Add Prescription</button></div>
+        </div>
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg><input id="prescriptionSearch" placeholder="Search prescriptions or customer…"></div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Prescription</th>
+                <th>Customer</th>
+                <th>Optometrist</th>
+                <th>Issued</th>
+                <th>Expires</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="prescriptionTableBody"><tr><td colspan="6" class="empty-message">Loading…</td></tr></tbody>
+          </table>
+          <div class="pagination" id="prescriptionPagination"><span>Loading…</span>
+            <div class="page-btns"></div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-products">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Catalog / <b>Product Management</b></div>
+            <div class="page-title">Product Management</div>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-outline" id="exportProductsBtn" type="button">Export CSV</button>
+            <button class="btn btn-primary" type="button" id="newProductBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>Add Product</button>
+          </div>
+        </div>
+        <div class="table-toolbar"
+          style="background:#fff;border:1px solid var(--border);border-radius:14px;margin-bottom:16px;">
+          <div class="tt-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+              </svg><input id="productSearch" placeholder="Search products by name or SKU…"></div>
+          <div class="filter-chip">Category: All</div>
+          <div class="filter-chip">Brand: All</div>
+          <div class="filter-chip">Status: All</div>
+        </div>
+        <div class="product-grid"><div class="empty-message">Loading products…</div></div>
+      </section>
+
+      
+      <section class="content-section" id="sec-brands">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Catalog / <b>Brand Management</b></div>
+            <div class="page-title">Brand Management</div>
+          </div>
+          <div class="page-actions"><button class="btn btn-primary" type="button" id="newBrandBtn"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>Add Brand</button></div>
+        </div>
+        <div class="table-card">
+          <div class="table-toolbar"><div class="tt-search"><input id="brandSearch" placeholder="Search brands…"></div></div>
+          <table>
+            <thead>
+              <tr>
+                <th>Brand</th>
+                <th>Description</th>
+                <th>Products</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="brandTableBody"><tr><td colspan="4" class="empty-message">Loading…</td></tr></tbody>
+          </table>
+          <div class="pagination"><span>Loading…</span><div class="page-btns"></div></div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-suppliers">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Catalog / <b>Supplier Management</b></div>
+            <div class="page-title">Supplier Management</div>
+          </div>
+          <div class="page-actions"><button class="btn btn-primary" type="button" id="newSupplierBtn"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>Add Supplier</button></div>
+        </div>
+        <div class="table-card">
+          <div class="table-toolbar"><div class="tt-search"><input id="supplierSearch" placeholder="Search suppliers…"></div></div>
+          <table>
+            <thead>
+              <tr>
+                <th>Supplier Name</th>
+                <th>Contact Person</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="supplierTableBody"><tr><td colspan="6" class="empty-message">Loading…</td></tr></tbody>
+          </table>
+          <div class="pagination"><span>Loading…</span><div class="page-btns"></div></div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-inventory">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Catalog / <b>Inventory Management</b></div>
+            <div class="page-title">Inventory Management</div>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-outline" id="stockAdjustmentBtn" type="button">Stock Adjustment</button>
+            <button class="btn btn-outline" id="inventoryHistoryBtn" type="button">Inventory History</button>
+            <button class="btn btn-primary" id="stockInBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>Stock In</button>
+          </div>
+        </div>
+        <div class="kpi-row" style="grid-template-columns:repeat(4,1fr); margin-bottom:18px;">
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 5v14M5 12h14"></path>
+                </svg></div>
+            </div>
+            <div class="kpi-value" id="inventoryMoveCount">0</div>
+            <div class="kpi-label">Recorded Movements</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg></div>
+            </div>
+            <div class="kpi-value" id="inventoryInCount">0</div>
+            <div class="kpi-label">Stock In Movements</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z">
+                  </path>
+                </svg></div>
+            </div>
+            <div class="kpi-value" id="inventoryOutCount">0</div>
+            <div class="kpi-label">Stock Out Movements</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="m9 9 6 6m0-6-6 6"></path>
+                </svg></div>
+            </div>
+            <div class="kpi-value" id="inventoryAdjustmentCount">0</div>
+            <div class="kpi-label">Adjustments</div>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg><input id="inventorySearch" placeholder="Search inventory…"></div>
+            <div class="filter-chip">Movement: All</div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Current Stock</th>
+                <th>Movement Qty</th>
+                <th>Recorded By</th>
+                <th>Type</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody"><tr><td colspan="6" class="empty-message">Loading…</td></tr></tbody>
+          </table>
+          <div class="pagination"><span>Showing 1–6 of 1,148 items</span>
+            <div class="page-btns">
+              <div class="page-btn">‹</div>
+              <div class="page-btn active">1</div>
+              <div class="page-btn">2</div>
+              <div class="page-btn">›</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-sales">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Commerce / <b>Sales Management</b></div>
+            <div class="page-title">Sales Management</div>
+          </div>
+          <div class="page-actions"><button class="btn btn-outline" id="viewRefundsBtn" type="button">View Returned Products</button><button
+              class="btn btn-primary" id="newSaleBtn" type="button">New POS Transaction</button></div>
+        </div>
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg><input id="salesSearch" placeholder="Search invoice or customer…"></div>
+            <div class="filter-chip" id="salesPaymentFilter" role="button" tabindex="0">Payment: All</div>
+            <div class="filter-chip" id="salesStaffFilter" role="button" tabindex="0">Staff: All</div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Invoice</th>
+                <th>Customer</th>
+                <th>Sales Staff</th>
+                <th>Total</th>
+                <th>Payment Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="salesTableBody"><tr><td colspan="6" class="empty-message">Loading…</td></tr></tbody>
+          </table>
+          <div class="pagination"><span>Loading…</span>
+            <div class="page-btns">
+              <div class="page-btn">‹</div>
+              <div class="page-btn active">1</div>
+              <div class="page-btn">2</div>
+              <div class="page-btn">›</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-payments">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">Commerce / <b>Payment Management</b></div>
+            <div class="page-title">Payment Management</div>
+          </div>
+          <div class="page-actions"><button class="btn btn-outline" id="paymentHistoryBtn" type="button">Payment History</button><button
+              class="btn btn-primary" id="approveRefundBtn" type="button">Review Refunds</button></div>
+        </div>
+        <div class="table-card">
+          <div class="table-toolbar"><div class="tt-search"><input id="paymentSearch" placeholder="Search payments or invoice…"></div></div>
+          <table>
+            <thead>
+              <tr>
+                <th>Invoice</th>
+                <th>Customer</th>
+                <th>Payment Method</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="paymentTableBody"><tr><td colspan="6" class="empty-message">Loading…</td></tr></tbody>
+          </table>
+          <div class="pagination"><span>Loading…</span><div class="page-btns"></div></div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-employees">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">People / <b>Employee Management</b></div>
+            <div class="page-title">Employee Management</div>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" id="employeeScheduleBtn">Work Schedule</button>
+            <button type="button" class="btn btn-outline" id="employeeSalaryBtn">Salary Management</button>
+            <button class="btn btn-primary" id="newEmployeeBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>Add Employee</button>
+          </div>
+        </div>
+        <form id="employeeForm" autocomplete="off" hidden>
+          <input type="number" min="1" id="eplID" placeholder="Employee ID (optional)" aria-label="Employee ID (optional)">
+          <input type="text" maxlength="150" id="eplFullName" placeholder="Full Name" aria-label="Full name" required>
+          <select id="roleID" aria-label="Employee role" required><option value="">Select role...</option></select>
+          <input type="number" min="0" step="0.01" id="eplSalary" placeholder="Salary" aria-label="Salary">
+          <input type="tel" maxlength="30" id="eplPhone" placeholder="Phone" aria-label="Phone">
+          <input type="email" maxlength="150" id="eplEmail" placeholder="Email" aria-label="Email">
+          <button type="submit" id="employeeSubmitBtn" class="btn btn-primary">Add Employee</button>
+          <button type="button" id="employeeClearBtn" class="btn btn-outline">Clear</button>
+        </form>
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg><input id="employeeSearch" type="search" placeholder="Search employees..." aria-label="Search employees"></div>
+            <div class="filter-chip" id="employeeRoleFilter" role="button" tabindex="0">Department: All</div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="employeeTableBody">
+              <tr>
+                <td colspan="6" class="empty-message">Loading employees…</td>
+              </tr>
+            </tbody>
+
+          </table>
+          <div class="pagination"><span>Loading…</span>
+            <div class="page-btns">
+              <div class="page-btn">‹</div>
+              <div class="page-btn active">1</div>
+              <div class="page-btn">2</div>
+              <div class="page-btn">›</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-reports">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">System / <b>Reports</b></div>
+            <div class="page-title">Reports Center</div>
+          </div>
+          <div class="page-actions"><button class="btn btn-outline">Export Excel</button><button
+              class="btn btn-primary">Export PDF</button></div>
+        </div>
+        <div class="report-grid">
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+              </svg></div>
+            <div class="report-title">Customer Report</div>
+            <div class="report-desc">Demographics, growth trend, and loyalty segments across all branches.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg></div>
+            <div class="report-title">Eye Examination Report</div>
+            <div class="report-desc">Exam volume, common diagnoses, and optometrist workload summary.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <path d="M14 2v6h6"></path>
+              </svg></div>
+            <div class="report-title">Prescription Report</div>
+            <div class="report-desc">Active, expiring, and expired prescriptions grouped by lens type.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 8V21H3V8"></path>
+                <path d="M1 3h22v5H1z"></path>
+              </svg></div>
+            <div class="report-title">Product Inventory Report</div>
+            <div class="report-desc">Stock levels, valuation, and slow-moving items across warehouses.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3h18v4H3zM3 7l2 13h14l2-13"></path>
+              </svg></div>
+            <div class="report-title">Sales Report</div>
+            <div class="report-desc">Daily, weekly, and monthly sales performance by branch and staff.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+                <path d="M16 8h4l3 3v5h-7z"></path>
+              </svg></div>
+            <div class="report-title">Purchase Report</div>
+            <div class="report-desc">Purchase orders, supplier costs, and delivery timelines.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+                <circle cx="5.5" cy="18.5" r="1.7"></circle>
+              </svg></div>
+            <div class="report-title">Supplier Report</div>
+            <div class="report-desc">Supplier reliability, lead time, and cost comparison.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg></div>
+            <div class="report-title">Revenue Report</div>
+            <div class="report-desc">Gross revenue, margins, and branch-by-branch comparison.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+          <div class="report-card">
+            <div class="report-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"></path>
+              </svg></div>
+            <div class="report-title">Best Selling Products Report</div>
+            <div class="report-desc">Top performers by units sold and revenue contribution.</div>
+            <div class="report-foot"><button class="btn btn-outline btn-sm">Preview</button><button
+                class="btn btn-primary btn-sm">Export</button></div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-settings">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">System / <b>Settings</b></div>
+            <div class="page-title">Settings</div>
+          </div>
+          <div class="page-actions"><button type="button" id="saveSettingsBtn" class="btn btn-primary">Save Changes</button></div>
+        </div>
+        <div class="settings-grid">
+          <div class="settings-card">
+            <div class="settings-card-head">
+              <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                </svg></div>
+              <h3>Store Information</h3>
+            </div>
+            <div class="settings-row"><label class="srlabel" for="settingsStoreName">Store Name</label><input class="srval uo-setting-input" id="settingsStoreName" maxlength="150" value="United Optic">
+            </div>
+            <div class="settings-row"><label class="srlabel" for="settingsAddress">Registered Address</label><input class="srval uo-setting-input" id="settingsAddress" maxlength="255"></div>
+            <div class="settings-row"><label class="srlabel" for="settingsEmail">Support Email</label><input class="srval uo-setting-input" id="settingsEmail" type="email" maxlength="150"></div>
+            <div class="settings-row"><label class="srlabel" for="settingsPhone">Phone</label><input class="srval uo-setting-input" id="settingsPhone" maxlength="30"></div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-head">
+              <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg></div>
+              <h3>Tax Configuration</h3>
+            </div>
+            <div class="settings-row"><label class="srlabel" for="settingsVatRate">VAT Rate (%)</label><input class="srval uo-setting-input" id="settingsVatRate" type="number" min="0" max="100" step="0.01" value="10"></div>
+            <div class="settings-row"><span class="srlabel">Tax-Inclusive Pricing</span>
+              <button type="button" class="toggle" id="settingsTaxInclusive" role="switch" aria-checked="false" aria-label="Tax-inclusive pricing"></button>
+            </div>
+            <div class="settings-row"><span class="srlabel">Auto-apply on Invoices</span>
+              <button type="button" class="toggle" id="settingsAutoApplyTax" role="switch" aria-checked="false" aria-label="Automatically apply tax to invoices"></button>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-head">
+              <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M12 7v5l3 3"></path>
+                </svg></div>
+              <h3>Business Hours</h3>
+            </div>
+            <div class="settings-row"><label class="srlabel" for="settingsWeekdayHours">Mon – Fri</label><input class="srval uo-setting-input" id="settingsWeekdayHours" maxlength="80" value="9:00 AM – 8:00 PM">
+            </div>
+            <div class="settings-row"><label class="srlabel" for="settingsSaturdayHours">Saturday</label><input class="srval uo-setting-input" id="settingsSaturdayHours" maxlength="80" value="9:00 AM – 9:00 PM">
+            </div>
+            <div class="settings-row"><label class="srlabel" for="settingsSundayHours">Sunday</label><input class="srval uo-setting-input" id="settingsSundayHours" maxlength="80" value="10:00 AM – 6:00 PM">
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-head">
+              <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M3 5v14a9 3 0 0 0 18 0V5"></path>
+                </svg></div>
+              <h3>Backup &amp; Restore</h3>
+            </div>
+            <div class="settings-row"><span class="srlabel">Last Backup</span><span id="lastBackupLabel" class="srval">No backup downloaded yet</span>
+            </div>
+            <div class="settings-row"><span class="srlabel">Backup Mode</span><span class="srval">Manual administrator download</span></div>
+            <div class="settings-row" style="border:none; padding-top:14px; gap:10px;"><button
+                id="backupNowBtn" class="btn btn-outline btn-sm">Download Backup</button><span class="srval">Database restore requires a separately reviewed recovery plan.</span></div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content-section" id="sec-notifications">
+        <div class="page-header">
+          <div>
+            <div class="breadcrumb">System / <b>Notifications</b></div>
+            <div class="page-title">Notification Center</div>
+          </div>
+          <div class="page-actions"><button id="markAllNotificationsRead" class="btn btn-outline">Mark all as read</button></div>
+        </div>
+        <div id="notificationList" class="panel" style="max-width:720px;"><div class="empty-message">Loading notifications…</div></div>
+      </section>
+
+      
+      <section class="content-section" id="sec-profile">
+        <div class="page-header"><div><div class="breadcrumb">Account / <b>Profile</b></div><div class="page-title">My Profile</div></div></div>
+        <div class="settings-grid profile-layout">
+          <div class="settings-card profile-identity"><div id="profileAvatar" class="avatar profile-avatar">U</div><h3 id="profileFullName">Loading profile...</h3><div id="profileSubtitle" class="profile-role">Account profile</div><div class="profile-actions"><button id="saveProfileBtn" class="btn btn-outline btn-sm" type="button">Edit Profile</button><button id="changePasswordBtn" class="btn btn-outline btn-sm" type="button">Change Password</button></div></div>
+          <div class="settings-card profile-details"><h3>Account Details</h3><div class="settings-row"><span class="srlabel">Email</span><span id="profileEmail" class="srval">-</span></div><div class="settings-row"><span class="srlabel">Phone</span><span id="profilePhone" class="srval">-</span></div><div class="settings-row"><span class="srlabel">Role</span><span id="profileRole" class="srval">-</span></div><div class="settings-row"><span class="srlabel">Username</span><span id="profileUsername" class="srval">-</span></div></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <script src="./JS/api.js?v=20261001-8"></script>
+  <script src="./JS/appointments.js?v=20261001-6"></script>
+  <script src="./JS/customers.js?v=20261001-6"></script>
+  <script src="./JS/employee.js?v=20261001-6"></script>
+  <script src="./JS/users.js?v=20261001-4"></script>
+  <script src="./JS/examinations.js?v=20261001-2"></script>
+  <script src="./JS/products.js?v=20261001-2"></script>
+  <script src="./JS/brands.js?v=20261001-1"></script>
+  <script src="./JS/suppliers.js?v=20261001-1"></script>
+  <script src="./JS/inventory.js?v=20261001-3"></script>
+  <script src="./JS/dashboard.js?v=20261001-4"></script>
+  <script src="./JS/payments.js?v=20261001-1"></script>
+  <script src="./JS/prescriptions.js?v=20261001-1"></script>
+  <script src="./JS/reports.js?v=20261001-1"></script>
+  <script src="./JS/profile-notifications.js?v=20261001-profile"></script>
+  <script src="./JS/sales.js?v=20261001-3"></script>
+  <script src="./JS/admin.js?v=20261001-4"></script>
+  <script src="./JS/auth.js"></script>
+  <script src="./JS/interactions.js?v=20261001-4"></script>
+
+</body>
+
+
+</html>

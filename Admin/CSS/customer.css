@@ -1,0 +1,139 @@
+
+
+
+
+#customerForm {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+#customerForm input,
+#customerForm select {
+    width: 100%;
+    height: 42px;
+    padding: 0 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: var(--text);
+
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+#customerForm input::placeholder {
+    color: #9aa3b2;
+}
+
+#customerForm input:focus,
+#customerForm select:focus {
+    border-color: var(--teal);
+    background: var(--teal-light);
+    box-shadow: 0 0 0 3px rgba(195, 133, 250, 0.12);
+}
+
+#customerForm select {
+    cursor: pointer;
+}
+
+
+#customerForm #custAddress {
+    grid-column: span 2;
+}
+
+#customerForm input[readonly] {
+    background: #f4f5f8;
+    color: #8a93a3;
+    cursor: not-allowed;
+}
+
+#customerSubmitBtn,
+#customerClearBtn {
+    width: 100%;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 9px;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#customerSubmitBtn {
+    border: none;
+    background: var(--teal);
+    color: #ffffff;
+}
+
+#customerSubmitBtn:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(85, 0, 159, 0.18);
+}
+
+#customerSubmitBtn:active {
+    transform: translateY(0);
+}
+
+#customerClearBtn {
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--text);
+}
+
+#customerClearBtn:hover {
+    background: var(--teal-light);
+    border-color: var(--teal);
+}
+
+
+#customerTableBody .ricon {
+    cursor: pointer;
+}
+
+#customerTableBody .empty-message {
+    text-align: center;
+    padding: 28px;
+    color: var(--text-mute, #8a93a3);
+    font-size: 13px;
+}
+
+@media (max-width: 1024px) {
+    #customerForm {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    #customerForm {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    #customerForm #custAddress {
+        grid-column: auto;
+    }
+
+    #customerForm input,
+    #customerForm select,
+    #customerSubmitBtn,
+    #customerClearBtn {
+        height: 40px;
+    }
+}

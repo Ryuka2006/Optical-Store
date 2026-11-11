@@ -1,0 +1,188 @@
+
+
+
+
+#appointmentForm {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+
+#appointmentForm input,
+#appointmentForm select {
+    width: 100%;
+    height: 42px;
+    padding: 0 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: var(--text);
+
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+#appointmentForm input::placeholder {
+    color: #9aa3b2;
+}
+
+
+#appointmentForm input:focus,
+#appointmentForm select:focus {
+    border-color: var(--teal);
+    background: var(--teal-light);
+    box-shadow: 0 0 0 3px rgba(195, 133, 250, 0.12);
+}
+
+
+#appointmentForm select {
+    cursor: pointer;
+}
+
+
+#appointmentSubmitBtn {
+    width: 100%;
+    height: 42px;
+    padding: 0 16px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: var(--teal);
+    color: #ffffff;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#appointmentSubmitBtn:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(85, 0, 159, 0.18);
+}
+
+#appointmentSubmitBtn:active {
+    transform: translateY(0);
+}
+
+
+
+
+
+
+.appt-actions {
+    display: inline-flex;
+    gap: 6px;
+}
+
+#appointmentContainer .btn-ghost:hover {
+    background: var(--teal-light);
+    color: var(--teal-dark);
+}
+
+#appointmentContainer .btn-danger:hover {
+    background: #fdecec;
+    color: #c62828;
+}
+
+
+#appointmentContainer .empty-message {
+    grid-column: 1 / -1;
+    padding: 28px;
+    text-align: center;
+    color: var(--text-mute, #8a93a3);
+    font-size: 13px;
+    background: var(--card);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+}
+
+
+#appointmentForm input[readonly] {
+    background: #f4f5f8;
+    color: #8a93a3;
+    cursor: not-allowed;
+}
+
+
+
+
+
+
+@media (max-width: 1024px) {
+
+    #appointmentForm {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    #appointmentForm {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    #appointmentForm input,
+    #appointmentForm select,
+    #appointmentSubmitBtn {
+        height: 40px;
+    }
+
+}
+
+
+
+
+
+
+@media (max-width: 540px) {
+
+    #appointmentForm {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    #appointmentForm input,
+    #appointmentForm select {
+        font-size: 11px;
+    }
+
+    #appointmentSubmitBtn {
+        font-size: 11px;
+    }
+
+}
