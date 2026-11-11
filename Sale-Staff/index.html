@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="../Admin/JS/role-gate.js" data-required-role="Sales Staff"></script>
+<title>United Optic — Sales Staff Dashboard</title>
+<link rel="stylesheet" href="CSS/salestaff.css?v=20261030-print-fix">
+<link rel="stylesheet" href="../Admin/CSS/role-workspace.css?v=20261030">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><circle cx="7" cy="12" r="4"></circle><circle cx="17" cy="12" r="4"></circle><path d="M11 12h2M3 12h0M21 12h0"></path></svg></div><div><b>United Optic</b><small>Sales Staff Panel</small></div><button class="drawer-close" id="drawerClose" type="button" aria-label="Close navigation">×</button></div>
+    <nav id="nav"></nav>
+    <div class="me"><div class="av" id="meAv"></div><div><b id="meName"></b><small id="meRole"></small></div></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="main">
+    <header class="top">
+      <button class="menu" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+      <input id="gsearch" placeholder="Search customers, products, orders…">
+      <span class="pill" id="today"></span>
+      <div class="av" id="topAv"></div>
+    </header>
+    <main id="view"></main>
+  </div>
+</div>
+<div class="modal" id="modal"><div class="box"><div class="mh"><h3 id="mTitle"></h3><button class="x" id="mClose" aria-label="Close">✕</button></div><div class="mb" id="mBody"></div></div></div>
+<div id="toast"></div>
+<div id="printArea"></div>
+<script src="../Admin/JS/profile.js?v=20261001-profile-v2"></script>
+<script src="JS/salestaff.js?v=20261030-print-fix"></script>
+</body>
+</html>
